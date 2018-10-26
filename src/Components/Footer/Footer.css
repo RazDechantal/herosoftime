@@ -1,0 +1,17 @@
+.bg-bluepurple {
+  background: rgba(49, 53, 71, 1);
+  color: #fff;
+  width: 100%;
+  height: 400px;
+}
+
+.section-5 {
+  padding: 60px 0px 50px 0px;
+}
+
+.decoration {
+  border: 2px solid #ffb112;
+  margin: 3%;
+  padding: 2%;
+  height: inherit;
+}

@@ -1,0 +1,21 @@
+.Component {
+  margin-top: 100px;
+
+  margin-top: 2rem;
+  padding: 2em 2em 2em 2em;
+  font-family: morl-medium;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  border-style: outset;
+  border-width: 7px;
+  border-color: coral;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.slider {
+  font-size: 44px;
+  font-weight: 500;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}

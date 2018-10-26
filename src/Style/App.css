@@ -1,0 +1,139 @@
+/* App*/
+body {
+  margin: 0;
+  padding: 0;
+  color: #555;
+  font-family: libre franklin, arial, sans-serif;
+  line-height: 25px;
+  font-weight: 400;
+  background: #fff;
+}
+
+.App {
+  text-align: left;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.App-logo {
+  /*  color: #f19b9b;
+  animation: App-logo-spin infinite 20s linear;
+  height: 50vmin;*/
+  text-align: center;
+  margin: auto;
+  background-image: url("https://cdn.financer.com/wp-content/uploads/sites/2/financer-bg-min.jpg");
+  height: 50vmin;
+  background-size: cover;
+  display: block;
+}
+
+.App-header {
+  background-color: #282c34;
+  /*min-height: 100vh;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-bottom: 5%;
+}
+.home-main-categories {
+  margin: 0 auto 80px;
+}
+
+.boxWrap.comparisons {
+  display: block;
+  background-image: url(/wp-content/uploads/sites/2/financer-bg-min.jpg);
+  background-size: cover;
+  padding-bottom: 30px;
+}
+
+.home .boxWrap {
+  display: block;
+}
+
+.header-row,
+.loading-wrapper-content,
+.saving-categories,
+.boxWrap {
+  z-index: 4;
+  position: relative;
+}
+
+.boxWrap {
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.borrow-money,
+.borrow-money h3,
+.save-money,
+.save-money h3,
+.personal-finance h3,
+.personal-finance,
+.insurances,
+.insurances h3 {
+  color: #2098ce;
+  border-color: #2098ce;
+}
+.center-box {
+  display: table;
+  margin: 10px auto;
+  width: auto;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15),
+    0 15px 10px -10px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  background-color: rgba(251, 251, 251, 0.85);
+}
+
+.boxLayer {
+  margin: 15px auto 15px auto;
+  width: 1175px;
+  z-index: 9;
+  position: relative;
+}
+
+.box-title {
+  color: #fff;
+  line-height: 33px;
+  text-align: left;
+  margin: 10px auto;
+  display: table;
+  padding: 100px 0 50px 0;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.54);
+  color: #fff;
+  font-weight: 600;
+  font-size: 45px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.App-text {
+  margin-top: 4rem;
+  margin-left: 4rem;
+  padding: 2%;
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding-right: 15px;
+  padding-left: 15px;
+  /*
+  font-family: 'Pragati Narrow', sans-serif;
+font-family: 'M PLUS 1p', sans-serif;
+font-family: 'Cabin Sketch', cursive;
+  */
+  font-family: "M PLUS 1p", sans-serif;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

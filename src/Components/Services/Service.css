@@ -1,0 +1,42 @@
+/*Service*/
+
+/** {
+  font-family: morl-medium;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}*/
+.col-4 {
+  -ms-flex: 0 0 33.333333%;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.center-col {
+  text-align: center;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.service-main {
+  margin-top: 2rem;
+  padding: 2em 2em 2em 2em;
+  font-family: morl-medium;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  border-style: outset;
+  border-width: 7px;
+  border-color: coral;
+  padding-right: 15px;
+  padding-left: 15px;
+}

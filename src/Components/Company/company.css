@@ -1,0 +1,16 @@
+.title {
+  text-align: center;
+}
+.decoration {
+  border: 2px solid #ffb112;
+  margin: 3%;
+  padding: 2%;
+}
+
+.decoration h3 {
+  color: darksalmon;
+}
+
+.decoration:hover {
+  background-color: lightgray;
+}
