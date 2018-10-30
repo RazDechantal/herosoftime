@@ -1,16 +1,16 @@
 {
   "main.css": "/herosoftime/static/css/main.02bc6ac8.chunk.css",
-  "main.js": "/herosoftime/static/js/main.88971350.chunk.js",
-  "main.js.map": "/herosoftime/static/js/main.88971350.chunk.js.map",
+  "main.js": "/herosoftime/static/js/main.ad604956.chunk.js",
+  "main.js.map": "/herosoftime/static/js/main.ad604956.chunk.js.map",
   "static/css/1.3efa5d3d.chunk.css": "/herosoftime/static/css/1.3efa5d3d.chunk.css",
   "static/js/1.0ecafffb.chunk.js": "/herosoftime/static/js/1.0ecafffb.chunk.js",
   "static/js/1.0ecafffb.chunk.js.map": "/herosoftime/static/js/1.0ecafffb.chunk.js.map",
   "runtime~main.js": "/herosoftime/static/js/runtime~main.cca0b3e0.js",
   "runtime~main.js.map": "/herosoftime/static/js/runtime~main.cca0b3e0.js.map",
-  "static/css/main.02bc6ac8.chunk.css.map": "/herosoftime/static/css/main.02bc6ac8.chunk.css.map",
-  "static/media/app.scss": "/herosoftime/static/media/header01.7f1b6518.jpg",
   "static/css/1.3efa5d3d.chunk.css.map": "/herosoftime/static/css/1.3efa5d3d.chunk.css.map",
+  "static/media/app.scss": "/herosoftime/static/media/header01.7f1b6518.jpg",
+  "static/css/main.02bc6ac8.chunk.css.map": "/herosoftime/static/css/main.02bc6ac8.chunk.css.map",
   "index.html": "/herosoftime/index.html",
-  "precache-manifest.808f7a090a8cf1052068dbdaa6e585ae.js": "/herosoftime/precache-manifest.808f7a090a8cf1052068dbdaa6e585ae.js",
+  "precache-manifest.c87a43d5d25ec47bba44054d185a7bdc.js": "/herosoftime/precache-manifest.c87a43d5d25ec47bba44054d185a7bdc.js",
   "service-worker.js": "/herosoftime/service-worker.js"
 }
