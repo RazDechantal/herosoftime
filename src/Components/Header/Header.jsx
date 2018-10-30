@@ -1,34 +1,43 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
+import MyComp from "../Company/Companies";
+
+const Loanes = () => {
+  return <p>test</p>;
+};
 
 class Header extends Component {
   render() {
     return (
       <div>
-        <div className="App-logo">
-          <h1 className="box-title">Hur kan vi hjälpa dig med din ekonomi?</h1>
-          <div class="home-main-categories boxLayer">
+        <div>
+          <div className="header-main">
+            <h1 className="header-slogan">
+              Hur kan vi hjälpa dig med din ekonomi?
+            </h1>
+            <div class="header-main-categories boxLayer" />
             <div class="center-box">
-              <a href="https://financer.com/sv/lana-pengar/">
-                <div class="boxTop borrow-money">
-                  <h3>Låna pengar</h3>
+              <a href="/Loan">
+                <div class="boxTop save-money">
+                  <h3>Loan</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/spara/">
+              <a href="/Spara">
                 <div class="boxTop save-money">
                   <h3>Spara &amp; investera pengar</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/forsakringar/">
+              <a href="/Insurance">
                 <div class="boxTop insurances">
                   <h3>Försäkringar</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/kreditkort/">
-                <div class="boxTop card">
+              <a href="/Credit">
+                <div class="boxTop insurances">
                   <h3>Kreditkort</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/privatekonomi/">
+              <a href="/Private">
                 <div class="boxTop personal-finance">
                   <h3>Privatekonomi</h3>
                 </div>
@@ -37,8 +46,8 @@ class Header extends Component {
           </div>
         </div>
         <div className="App-header">
-          <h1>Looking for Heros?</h1>
-          <p>Here we come!</p>
+          <h1>Looking for most?</h1>
+          <p>Ready for the best?</p>
         </div>
       </div>
     );

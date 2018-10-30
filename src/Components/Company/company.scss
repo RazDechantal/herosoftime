@@ -1,0 +1,20 @@
+$border-color: #ffb112;
+$decoration-h3-color: darksalmon;
+$decoration-hover: lightgray;
+
+.title {
+  text-align: center;
+}
+.decoration {
+  border: 2px solid $border-color;
+  margin: 3%;
+  padding: 2%;
+}
+
+.decoration h3 {
+  color: $decoration-h3-color;
+}
+
+.decoration:hover {
+  background-color: $decoration-hover;
+}

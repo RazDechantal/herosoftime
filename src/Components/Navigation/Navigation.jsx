@@ -1,12 +1,13 @@
 import React from "react";
+
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
   NavLink,
+  NavItem,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -32,35 +33,45 @@ export default class Navigation extends React.Component {
   render() {
     return (
       <div>
-        <Navbar light expand="md">
-          <NavbarBrand href="/">
-            <img src={SRC} alt="Some text" />
-          </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="http://localhost/Users/Users.jsx">
-                  Projects
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://helphero.se">Help Hero</NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Services
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>För Hus- och Hemägare</DropdownItem>
-                  <DropdownItem>För dig som vill bli en HelpHero?</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <div className="App">
+          <Navbar light expand="md">
+            <NavbarBrand to="/">
+              <img src={SRC} alt="Some text" />
+            </NavbarBrand>
+            <NavbarToggler onClick={this.toggle} />
+            <Collapse isOpen={this.state.isOpen} navbar>
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                  <NavLink href="/" activeClassName="is-active" exact={true}>
+                    Home
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/Company" activeClassName="is-active">
+                    Companies
+                  </NavLink>
+                </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Services
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <NavLink href="/Loan" activeClassName="is-active">
+                        Loans
+                      </NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="/Loan" activeClassName="is-active">
+                        Creditss
+                      </NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </Nav>
+            </Collapse>
+          </Navbar>
+        </div>
       </div>
     );
   }

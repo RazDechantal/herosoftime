@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { Form, FormGroup } from "reactstrap";
 
 import { fetchCompanies } from "../../Action/companyAction";
-import "../Company/company.css";
+import "../Company/company.scss";
 
 let Loaners = [];
 
