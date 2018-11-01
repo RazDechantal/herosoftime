@@ -14,9 +14,9 @@ class MyRoutes extends Component {
           <BrowserRouter>
             <div className="App">
               <Switch>
-                <Route path="/" activeClass={true} component={Home} exact />
-                <Route path="/Company" activeClass={true} component={Company} />
-                <Route path="/Loan" activeClass={true} component={Loan} />
+                <Route path="/herosoftime/" activeClass={true} component={Home} exact />
+                <Route path="/herosoftime/Company" activeClass={true} component={Company} />
+                <Route path="/herosoftime/Loan" activeClass={true} component={Loan} />
                 <Route component={NotFoundPage} />
               </Switch>
             </div>
