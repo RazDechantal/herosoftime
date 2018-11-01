@@ -12,10 +12,12 @@ import userReducer from "./userReducer";
 import companyReducer from "./companyReducer";
 import offerReducer from "./offerReducer";
 import contentReducer from "./contentReducer";
+import loanReducer from "./loanReducer";
 
 export default combineReducers({
   app: appReducer,
   posts: postReducer,
+  loans: loanReducer,
   companies: companyReducer,
   offers: offerReducer,
   users: userReducer,

@@ -1,4 +1,4 @@
-import { FETCH_CONTENTS, NEW_CONTENT } from "../Action/types";
+import { FETCH_CONTENTS } from "../Action/types";
 
 const initialState = {
   items: [],

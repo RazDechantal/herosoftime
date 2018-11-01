@@ -42,7 +42,7 @@ export default class Navigation extends React.Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/" activeClassName="is-active" exact={true}>
+                  <NavLink href="/" activeClassName="is-active" exact>
                     Home
                   </NavLink>
                 </NavItem>

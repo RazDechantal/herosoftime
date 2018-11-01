@@ -2,9 +2,16 @@ export const WRITE_STAT = "WRITE_STAT";
 export const READ_STAT = "READ_STAT";
 export const WRITE_MONEY_STAT = "WRITE_MONEY_STAT";
 
+export const READ_BOX_STAT = "READ_BOX_STAT";
+export const WRITE_BOX_STAT = "WRITE_BOX_STAT";
+
 export const FETCH_COMPANIES = "FETCH_COMPANIES";
 export const NEW_COMPANY = "NEW_COMPANY";
 export const FETCH_ONE_COMPANY = "FETCH_ONE_COMPANY";
+
+export const FETCH_LOAN = "FETCH_LOAN";
+export const NEW_LOAN = "NEW_LOAN";
+export const FETCH_ONE_LOAN = "FETCH_ONE_LOAN";
 
 export const FETCH_USERS = "FETCH_USERS";
 export const NEW_USER = "NEW_USER";

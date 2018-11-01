@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
-import MyComp from "../Company/Companies";
-
-const Loanes = () => {
-  return <p>test</p>;
-};
 
 class Header extends Component {
   render() {
@@ -15,30 +9,30 @@ class Header extends Component {
             <h1 className="header-slogan">
               Hur kan vi hjälpa dig med din ekonomi?
             </h1>
-            <div class="header-main-categories boxLayer" />
-            <div class="center-box">
+            <div className="header-main-categories boxLayer" />
+            <div className="center-box">
               <a href="/Loan">
-                <div class="boxTop save-money">
+                <div className="boxTop save-money">
                   <h3>Loan</h3>
                 </div>
               </a>
               <a href="/Spara">
-                <div class="boxTop save-money">
+                <div className="boxTop save-money">
                   <h3>Spara &amp; investera pengar</h3>
                 </div>
               </a>
               <a href="/Insurance">
-                <div class="boxTop insurances">
+                <div className="boxTop insurances">
                   <h3>Försäkringar</h3>
                 </div>
               </a>
               <a href="/Credit">
-                <div class="boxTop insurances">
+                <div className="boxTop insurances">
                   <h3>Kreditkort</h3>
                 </div>
               </a>
               <a href="/Private">
-                <div class="boxTop personal-finance">
+                <div className="boxTop personal-finance">
                   <h3>Privatekonomi</h3>
                 </div>
               </a>

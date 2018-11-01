@@ -1,4 +1,4 @@
-import { FETCH_COMPANIES, NEW_COMPANY } from "../Action/types";
+import { FETCH_COMPANIES } from "../Action/types";
 import fire from "../Config/firebase";
 
 // Retreiving the info from backend and dispatching to the store
