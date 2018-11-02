@@ -1,4 +1,4 @@
-import { FETCH_OFFERS, NEW_OFFER } from "../Action/types";
+import { FETCH_OFFERS } from "../Action/types";
 
 const initialState = {
   items: [],

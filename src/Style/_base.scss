@@ -63,6 +63,10 @@ body {
   font-family: "M PLUS 1p", sans-serif;
 }
 
+.is-active {
+  color: green;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

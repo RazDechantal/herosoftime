@@ -1,8 +1,4 @@
-import {
-  FETCH_COMPANIES,
-  NEW_COMPANY,
-  FETCH_ONE_COMPANY
-} from "../Action/types";
+import { FETCH_COMPANIES, FETCH_ONE_COMPANY } from "../Action/types";
 
 const initialState = {
   items: [],
