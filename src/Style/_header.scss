@@ -1,0 +1,36 @@
+//@import url("https://cdn.financer.com/sv/wp-content/cache/min/2/85b9ca823919ecf65be1514a753ff6f3.css");
+.header-main {
+  display: block;
+  background-image: url("../Static/img/header/header01.jpg");
+  background-size: cover;
+}
+
+.header-slogan {
+  line-height: 33px;
+  text-align: left;
+  margin: 10px auto;
+  display: table;
+  padding: 100px 0 50px 0;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.54);
+  color: rgb(216, 117, 25);
+  font-weight: 600;
+  font-size: 45px;
+}
+
+.header-main-categories {
+  margin: 0 auto 80px;
+}
+
+.boxLayer {
+  margin: 15px auto 15px auto;
+  width: 1175px;
+  z-index: 9;
+  position: relative;
+}
+
+.boxTop {
+  text-align: center;
+  padding: 5px 0 13px 0;
+  overflow: hidden;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08);
+}

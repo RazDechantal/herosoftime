@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST } from "../Action/types";
+import { FETCH_POSTS } from "../Action/types";
 
 const initialState = {
   items: [],

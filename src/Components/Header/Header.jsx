@@ -4,32 +4,35 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <div className="App-logo">
-          <h1 className="box-title">Hur kan vi hjälpa dig med din ekonomi?</h1>
-          <div class="home-main-categories boxLayer">
-            <div class="center-box">
-              <a href="https://financer.com/sv/lana-pengar/">
-                <div class="boxTop borrow-money">
-                  <h3>Låna pengar</h3>
+        <div>
+          <div className="header-main">
+            <h1 className="header-slogan">
+              Hur kan vi hjälpa dig med din ekonomi?
+            </h1>
+            <div className="header-main-categories boxLayer" />
+            <div className="center-box">
+              <a href="/Loan">
+                <div className="boxTop save-money">
+                  <h3>Loan</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/spara/">
-                <div class="boxTop save-money">
+              <a href="/Spara">
+                <div className="boxTop save-money">
                   <h3>Spara &amp; investera pengar</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/forsakringar/">
-                <div class="boxTop insurances">
+              <a href="/Insurance">
+                <div className="boxTop insurances">
                   <h3>Försäkringar</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/kreditkort/">
-                <div class="boxTop card">
+              <a href="/Credit">
+                <div className="boxTop insurances">
                   <h3>Kreditkort</h3>
                 </div>
               </a>
-              <a href="https://financer.com/sv/privatekonomi/">
-                <div class="boxTop personal-finance">
+              <a href="/Private">
+                <div className="boxTop personal-finance">
                   <h3>Privatekonomi</h3>
                 </div>
               </a>
@@ -37,8 +40,8 @@ class Header extends Component {
           </div>
         </div>
         <div className="App-header">
-          <h1>Looking for Heros?</h1>
-          <p>Here we come!</p>
+          <h1>Looking for most?</h1>
+          <p>Ready for the best?</p>
         </div>
       </div>
     );

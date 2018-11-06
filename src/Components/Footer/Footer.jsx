@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
-import "./Footer.css";
+import "./footer.scss";
 
 class Footer extends Component {
   render() {

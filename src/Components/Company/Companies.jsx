@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { fetchCompanies } from "../../Action/companyAction";
 import { readStat } from "../../Action/appReadStat";
 
-import "../Company/company.css";
+import "../Company/company.scss";
 
 class Companies extends Component {
   componentWillMount() {

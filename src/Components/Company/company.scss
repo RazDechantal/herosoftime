@@ -1,0 +1,36 @@
+$border-color: #ffb112;
+$decoration-h3-color: darksalmon;
+$decoration-hover: lightgray;
+
+.title {
+  text-align: center;
+}
+.decoration {
+  border: 2px solid $border-color;
+  margin: 3%;
+  padding: 2%;
+}
+
+.decoration h3 {
+  color: $decoration-h3-color;
+}
+
+.decoration:hover {
+  background-color: $decoration-hover;
+}
+
+.secondtitle,
+.entry *:not(.fpcontent):not(.qa-faq) .secondtitle,
+.entry .secondtitle {
+  font-size: 17px;
+  color: #444;
+  line-height: 25px;
+  text-align: center;
+  margin: 20px auto 0 auto;
+  text-shadow: 2px 2px 1px #fff;
+  display: table;
+  background: rgba(255, 255, 255, 1);
+  padding: 10px;
+  font-weight: 300;
+  border-radius: 5px;
+}
