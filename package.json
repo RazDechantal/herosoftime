@@ -1,14 +1,17 @@
 {
-  "name": "loanhero",
+  "name": "herosoftime",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://razdechantal.github.io/herosoftime/",
   "dependencies": {
+    "ajv": "^6.0.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "build-scripts": "^1.0.0",
     "faker": "^4.1.0",
     "firebase": "^5.5.4",
+    "gh-pages": "^2.0.1",
+    "jquery": "^3.3.1",
     "node-sass": "^4.9.4",
     "normalize.css": "^8.0.0",
     "rc-slider": "^8.6.3",
@@ -22,8 +25,7 @@
     "reactstrap": "^6.4.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "serve": "^10.0.2",
-    "gh-pages": "^2.0.1"
+    "serve": "^10.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
