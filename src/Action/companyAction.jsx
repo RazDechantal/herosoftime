@@ -6,20 +6,30 @@ export const fetchCompanies = () => dispatch => {
   var ref = fire
     .database()
     .ref()
-    .child("Companies");
+    .child("Companies")
+    .orderByChild("company");
 
-  ref.on(
+  const orderdList = [];
+
+  ref.once(
     "value",
     function(snapshot) {
+      /* Performance should be improved */
+      //console.log("key", JSON.stringify(snapshot.key));
+      //console.log("val", JSON.stringify(snapshot.val()));
+      //console.log("numChildren", JSON.stringify(snapshot.numChildren()));
+      snapshot.forEach(function(item) {
+        console.log(item.val());
+        orderdList.push(item.val());
+      });
+
       dispatch({
         type: FETCH_COMPANIES,
-        payload: snapshot.val()
+        payload: orderdList
       });
     },
     function(error) {
       console.log("Error: " + error.code);
     }
   );
-
-  //debugger;
 };

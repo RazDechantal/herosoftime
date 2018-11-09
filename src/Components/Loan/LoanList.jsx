@@ -10,8 +10,48 @@ import "../Company/company.scss";
 
 class LoanList extends Component {
   componentWillMount() {
-    this.props.fetchLoan();
+    const boxes = {
+      private: this.props.privateBox,
+      anmarkningBox: this.props.anmarkningBox,
+      ucBox: this.props.ucBox,
+      smsBox: this.props.smsBox
+    };
+    //debugger;
+    this.props.fetchLoan(boxes);
   }
+
+  componentWillUpdate() {
+    if (this.props.privateBox.anmarkningBox)
+      this.props.fetchLoan({
+        private: this.props.privateBox,
+        anmarkningBox: this.props.anmarkningBox,
+        ucBox: this.props.ucBox,
+        smsBox: this.props.smsBox
+      });
+  }
+
+  /*componentWillMount() {
+     if (this.props.privateBox != nextProps.privateBox)
+      this.props.fetchLoan({
+        private: this.props.privateBox,
+        anmarkningBox: this.props.anmarkningBox,
+        ucBox: this.props.ucBox,
+        smsBox: this.props.smsBox
+      });
+      this.props.privateBox = nextProps.privateBox;
+    this.props.anmarkningBox = nextProps.anmarkningBox;
+    this.props.ucBox = nextProps.ucBox;
+    this.props.smsBox = nextProps.smsBox;
+  
+    const boxes = {
+      private: this.props.privateBox,
+      anmarkningBox: this.props.anmarkningBox,
+      ucBox: this.props.ucBox,
+      smsBox: this.props.smsBox
+    };
+
+    this.props.fetchLoan(boxes);
+  }*/
   render() {
     const loanitems = this.props.loans.map(loan => (
       <div key={loan.id} className="decoration">
@@ -37,6 +77,9 @@ class LoanList extends Component {
 
     return (
       <div>
+        <h1>Value</h1>
+        <p>{this.props.anmarkningBox ? "ticked" : "Not ticked"}</p>
+
         <div>
           <h2 className="secondtitle">Compare loans</h2>
           <hr />

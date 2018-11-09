@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
 import LoanList from "../Components/Loan/LoanList";
 import CheckBox from "../Components/Checkbox/Checkbox";
+import LoanListNoRedux from "../Components/Loan/LoanListNoRedux";
 
 export default class Loan extends Component {
   render() {
@@ -10,14 +11,7 @@ export default class Loan extends Component {
       <Container>
         <Row className="App-text">
           <Col xs="12">
-            <div>
-              <CheckBox />
-            </div>
-          </Col>
-        </Row>
-        <Row className="App-text">
-          <Col xs="12">
-            <LoanList />
+            <LoanListNoRedux />
           </Col>
         </Row>
       </Container>

@@ -42,14 +42,10 @@ export default class Navigation extends React.Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/" activeClassName="is-active" exact>
-                    Home
-                  </NavLink>
+                  <NavLink href="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/Company" activeClassName="is-active">
-                    Companies
-                  </NavLink>
+                  <NavLink href="/Company">Companies</NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
@@ -57,14 +53,10 @@ export default class Navigation extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href="/Loan" activeClassName="is-active">
-                        Loans
-                      </NavLink>
+                      <NavLink href="/Loan">Loans</NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/Loan" activeClassName="is-active">
-                        Creditss
-                      </NavLink>
+                      <NavLink href="/Loan">Creditss</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>

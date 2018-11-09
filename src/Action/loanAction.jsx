@@ -2,18 +2,28 @@ import { FETCH_LOAN } from "../Action/types";
 import fire from "../Config/firebase";
 
 // Retreiving the info from backend and dispatching to the store
-export const fetchLoan = () => dispatch => {
+export const fetchLoan = boxes => dispatch => {
   var ref = fire
     .database()
     .ref()
-    .child("Loans");
+    .child("Loans")
+    .orderByChild("company");
+
+  const orderdList = [];
 
   ref.on(
     "value",
     function(snapshot) {
+      //debugger;
+
+      snapshot.forEach(function(item) {
+        console.log(item.val());
+        orderdList.push(item.val());
+      });
       dispatch({
         type: FETCH_LOAN,
-        payload: snapshot.val()
+        //payload: boxes.anmarkningBox ? orderdList : snapshot.val()
+        payload: orderdList
       });
     },
     function(error) {
@@ -23,3 +33,8 @@ export const fetchLoan = () => dispatch => {
 
   //debugger;
 };
+
+/*        payload: boxes.anmarkningBox
+          ? snapshot.val().filter(item => item.BadRecordCheck == "Yes")
+          : snapshot.val()
+ */
