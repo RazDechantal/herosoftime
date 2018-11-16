@@ -1,35 +1,32 @@
 import { FETCH_COMPANIES } from "../Action/types";
-import fire from "../Config/firebase";
+import { WRITE_MONEY_STAT } from "../Action/types";
+
+// Firebase
+import firebase from "firebase";
+import cloudConfig from "../Config/cloudFirebase";
 
 // Retreiving the info from backend and dispatching to the store
-export const fetchCompanies = () => dispatch => {
-  var ref = fire
-    .database()
-    .ref()
-    .child("Companies")
-    .orderByChild("company");
+export const fetchCompanies = (loan, period) => dispatch => {
+  const loanList = [];
+  var db = firebase.firestore(cloudConfig);
+  db.settings({
+    timestampsInSnapshots: true
+  });
 
-  const orderdList = [];
+  var loans = db.collection("Loans");
+  var query = loans.where("MaxLoan", ">=", loan);
 
-  ref.once(
-    "value",
-    function(snapshot) {
-      /* Performance should be improved */
-      //console.log("key", JSON.stringify(snapshot.key));
-      //console.log("val", JSON.stringify(snapshot.val()));
-      //console.log("numChildren", JSON.stringify(snapshot.numChildren()));
-      snapshot.forEach(function(item) {
-        console.log(item.val());
-        orderdList.push(item.val());
-      });
-
-      dispatch({
-        type: FETCH_COMPANIES,
-        payload: orderdList
-      });
-    },
-    function(error) {
-      console.log("Error: " + error.code);
-    }
-  );
+  query.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      loanList.push(doc.data());
+    });
+    dispatch({
+      type: FETCH_COMPANIES,
+      payload: loanList
+    });
+    dispatch({
+      type: WRITE_MONEY_STAT,
+      payload: period
+    });
+  });
 };

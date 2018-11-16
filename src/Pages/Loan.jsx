@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
 import { Container, Row, Col } from "reactstrap";
-import LoanList from "../Components/Loan/LoanList";
-import CheckBox from "../Components/Checkbox/Checkbox";
 import LoanListNoRedux from "../Components/Loan/LoanListNoRedux";
 
 export default class Loan extends Component {

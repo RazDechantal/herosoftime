@@ -3,7 +3,7 @@ import { Row, Col } from "reactstrap";
 
 // Firebase
 import fire from "../../Config/firebase";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import cloudConfig from "../../Config/cloudFirebase";
 
 const refCloud = cloudConfig.database().ref();
@@ -84,17 +84,21 @@ const Crud = {
     Loans.doc("Advisa").set({
       id: 1,
       company: "Advisa",
-      InterestRate: "2.95",
-      MaxLoan: "600000",
-      AgeLimit: "18",
+      InterestRate: 2.95,
+      MaxLoan: 600000,
+      MaxPer: 15,
+      MonthlyPayment: 4129.08,
+      TotalExpense: 143233.81,
+      AgeLimit: 18,
       NoCreditCheck: "No",
-      MinIncome: "120000",
+      MinIncome: 120000,
       CustomerLimit: "None",
       BadRecordCheck: "No",
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/advisa-logo-2018.png",
       private: "Yes",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/advisa/redirect/?b=s"
     });
 
     Loans.doc("Lendo").set({
@@ -102,6 +106,9 @@ const Crud = {
       company: "Lendo",
       InterestRate: "2.95",
       MaxLoan: "500000",
+      MaxPer: 15,
+      MonthlyPayment: 344.09,
+      TotalExpense: 11936.15,
       AgeLimit: "19",
       NoCreditCheck: "No",
       MinIncome: "100000",
@@ -110,7 +117,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/lendo-logo-2018-1.png",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/lendo/redirect/?b=s"
     });
 
     Loans.doc("Direkto").set({
@@ -118,6 +126,9 @@ const Crud = {
       company: "Direkto",
       InterestRate: "2.95",
       MaxLoan: "500000",
+      MaxPer: 15,
+      MonthlyPayment: 344.09,
+      TotalExpense: 11936.15,
       AgeLimit: "20",
       NoCreditCheck: "No",
       MinIncome: "150000",
@@ -126,7 +137,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/logo-dark-1-e1494921133971.png",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/direkto/redirect/?b=s"
     });
 
     Loans.doc("Lendify").set({
@@ -134,6 +146,9 @@ const Crud = {
       company: "Lendify",
       InterestRate: "2.95",
       MaxLoan: "500000",
+      MaxPer: 15,
+      MonthlyPayment: 344.09,
+      TotalExpense: 11936.15,
       AgeLimit: "19",
       NoCreditCheck: "No",
       MinIncome: "180000",
@@ -142,7 +157,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/lendify.png",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/lendify/redirect/?b=s"
     });
 
     Loans.doc("Consector").set({
@@ -150,6 +166,9 @@ const Crud = {
       company: "Consector",
       InterestRate: "2.95",
       MaxLoan: "600000",
+      MaxPer: 15,
+      MonthlyPayment: 344.09,
+      TotalExpense: 11936.15,
       AgeLimit: "18",
       NoCreditCheck: "No",
       MinIncome: "120000",
@@ -158,7 +177,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/consector-1.jpg",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/consector/redirect/?b=s"
     });
 
     Loans.doc("Freedomfinance").set({
@@ -166,6 +186,9 @@ const Crud = {
       company: "FreedomFinance",
       InterestRate: "3.54",
       MaxLoan: "600000",
+      MaxPer: 15,
+      MonthlyPayment: 358.42,
+      TotalExpense: 14516.36,
       AgeLimit: "18",
       NoCreditCheck: "No",
       MinIncome: "100000",
@@ -174,7 +197,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/freedom-finance-logo.png",
       private: "Yes",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/freedom-finance/redirect/?b=s"
     });
 
     Loans.doc("Zmatra").set({
@@ -182,6 +206,9 @@ const Crud = {
       company: "Zmatra",
       InterestRate: "3.54",
       MaxLoan: "600000",
+      MaxPer: 15,
+      MonthlyPayment: 358.42,
+      TotalExpense: 14516.36,
       AgeLimit: "18",
       NoCreditCheck: "No",
       MinIncome: "100000",
@@ -190,7 +217,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/zmarta-1.jpg",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/zmatra/redirect/?b=s"
     });
 
     Loans.doc("Pengino").set({
@@ -198,6 +226,9 @@ const Crud = {
       company: "Pengino",
       InterestRate: "3.54",
       MaxLoan: "500000",
+      MaxPer: 15,
+      MonthlyPayment: 358.42,
+      TotalExpense: 14516.36,
       AgeLimit: "18",
       NoCreditCheck: "No",
       MinIncome: "100000",
@@ -206,7 +237,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/pengino-1.png",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/pengino/redirect/?b=s"
     });
 
     Loans.doc("ArcadiaFinans").set({
@@ -214,6 +246,9 @@ const Crud = {
       company: "ArcadiaFinans",
       InterestRate: "3.54",
       MaxLoan: "600000",
+      MaxPer: 15,
+      MonthlyPayment: 361.17,
+      TotalExpense: 15011.36,
       AgeLimit: "18",
       NoCreditCheck: "No",
       MinIncome: "120000",
@@ -222,7 +257,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/Arcadia.png",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/arcadia-finans/redirect/?b=s"
     });
 
     Loans.doc("Santander").set({
@@ -230,6 +266,9 @@ const Crud = {
       company: "Santander",
       InterestRate: "3.54",
       MaxLoan: "350000",
+      MaxPer: 15,
+      MonthlyPayment: 361.17,
+      TotalExpense: 15011.36,
       AgeLimit: "20",
       NoCreditCheck: "No",
       MinIncome: "150000",
@@ -238,7 +277,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/santander.jpg",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/santander/redirect/?b=s"
     });
 
     Loans.doc("Marginalen").set({
@@ -246,6 +286,9 @@ const Crud = {
       company: "Marginalen",
       InterestRate: "3.50",
       MaxLoan: "350000",
+      MaxPer: 15,
+      MonthlyPayment: 361.17,
+      TotalExpense: 15011.36,
       AgeLimit: "20",
       NoCreditCheck: "No",
       MinIncome: "150000",
@@ -254,7 +297,8 @@ const Crud = {
       logo:
         "https://cdn.financer.com/sv/wp-content/uploads/sites/2/marginalen.jpg",
       private: "No",
-      sms: "No"
+      sms: "No",
+      link: "https://financer.com/sv/foretag/marginalen/redirect/?b=s"
     });
 
     Loans.doc("Bynk").set({
@@ -320,7 +364,7 @@ const Crud = {
       private: "No",
       sms: "Yes"
     });
-  },*/
+  }*/
 };
 
 export default Crud;

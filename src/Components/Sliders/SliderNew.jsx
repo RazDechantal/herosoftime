@@ -48,8 +48,8 @@ class SliderNew extends Component {
         <br />
         <Slider
           value={this.props.present}
-          step={this.props.present < 9500 ? 500 : 10000}
-          defaultValue={this.props.defaultVal}
+          step={this.props.present < 10000 ? 500 : 10000}
+          name="sumSlider"
           min={this.props.min}
           max={this.props.max}
           onChange={this.onSliderChange}
@@ -58,7 +58,7 @@ class SliderNew extends Component {
         <label>Years</label>
         <Input
           type="number"
-          value={this.props.loanPresent}
+          value={this.props.loanPeriod}
           onChange={this.onTimeInputChange}
           name="inputDegree"
           step={this.props.loanStep}
@@ -67,9 +67,10 @@ class SliderNew extends Component {
         />
         <br />
         <Slider
-          value={this.props.loanPresent}
+          value={this.props.loanPeriod}
           step={1}
           defaultValue={0}
+          name="periodSlider"
           min={this.props.yearMin}
           max={this.props.yearMAx}
           onChange={this.onTimeSliderChange}

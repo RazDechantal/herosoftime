@@ -8,7 +8,6 @@ const IMG =
 class Service extends Component {
   buildAdd() {
     let services = this.props;
-    //debugger;
     return services;
   }
 

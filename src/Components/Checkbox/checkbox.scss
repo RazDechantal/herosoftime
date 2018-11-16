@@ -11,7 +11,7 @@
 
 .checkboxFive {
   margin: 10px 0 0 0;
-  width: 300px;
+  width: auto;
   display: inline-block;
   text-align: left;
 }
@@ -26,7 +26,6 @@
 }
 
 .item-categories .checkboxFive {
-  display: block;
   width: auto;
 }
 
@@ -63,4 +62,18 @@ label {
   margin-bottom: 0.5rem;
   margin-right: 2rem;
   padding-left: 0.5 rem;
+}
+
+@media (max-width: 800px) {
+  .checkboxFive {
+    margin: 10px 0 0 0;
+    width: auto;
+    display: block;
+  }
+
+  .item-categories {
+    border-radius: 3px;
+    box-shadow: none;
+    padding: 10px;
+  }
 }

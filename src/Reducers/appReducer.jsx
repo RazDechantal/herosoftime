@@ -24,6 +24,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
+  //debugger;
   switch (action.type) {
     case READ_STAT:
       return initialState;
@@ -43,7 +44,7 @@ export default function(state = initialState, action) {
     case WRITE_MONEY_STAT:
       return {
         ...state,
-        loanPresent: action.payload
+        loanPeriod: action.payload
       };
     default:
       return state;

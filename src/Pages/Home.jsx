@@ -10,19 +10,19 @@ class App extends Component {
     return (
       <Container>
         <Row className="App-text">
-          <Col xs="4">
+          <Col xs="12" md="6">
             <div>
-              <Content content="title2" />
+              <Content content="Jämför Lån" />
             </div>
           </Col>
-          <Col xs="8">
+          <Col xs="12" md="6">
             <div>
               <SliderNew />
             </div>
           </Col>
         </Row>
         <Row className="App-text">
-          <Col xs="12">
+          <Col xs="12" sm="12">
             <Companies />
           </Col>
         </Row>

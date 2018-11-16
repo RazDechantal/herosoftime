@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
 $background-color: gba(49, 53, 71, 1);
 $font-color: #fff;
 $border-spec: 2px solid #ffb112;
@@ -13,10 +15,31 @@ $border-spec: 2px solid #ffb112;
   padding: 60px 0px 50px 0px;
 }
 
-.decoration {
-  border: $border-spec;
-  border-radius: 5%;
+.main-wrap {
   margin: 3%;
   padding: 2%;
   height: inherit;
+  text-align: center;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3b5998;
+  color: white;
+}
+
+.contact {
+  font-size: 18px;
 }

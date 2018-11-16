@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { NavLink } from "reactstrap";
+
 class Header extends Component {
   render() {
     return (
@@ -11,31 +13,31 @@ class Header extends Component {
             </h1>
             <div className="header-main-categories boxLayer" />
             <div className="center-box">
-              <a href="/Loan">
+              <div className="App">
                 <div className="boxTop save-money">
-                  <h3>Loan</h3>
+                  <NavLink href="/app/Loan">
+                    <h3>Loan</h3>
+                  </NavLink>
                 </div>
-              </a>
-              <a href="/Spara">
+
                 <div className="boxTop save-money">
-                  <h3>Spara &amp; investera pengar</h3>
+                  <NavLink href="/app/Spara">
+                    <h3>Spara &amp; investera pengar</h3>
+                  </NavLink>
                 </div>
-              </a>
-              <a href="/Insurance">
-                <div className="boxTop insurances">
-                  <h3>Försäkringar</h3>
+
+                <div className="boxTop save-money">
+                  <NavLink href="/app/Insurance">
+                    <h3>Försäkring</h3>
+                  </NavLink>
                 </div>
-              </a>
-              <a href="/Credit">
-                <div className="boxTop insurances">
-                  <h3>Kreditkort</h3>
+
+                <div className="boxTop save-money">
+                  <NavLink href="/app/Kreditkort">
+                    <h3>Kreditkort</h3>
+                  </NavLink>
                 </div>
-              </a>
-              <a href="/Private">
-                <div className="boxTop personal-finance">
-                  <h3>Privatekonomi</h3>
-                </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>

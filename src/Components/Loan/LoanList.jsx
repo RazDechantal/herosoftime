@@ -16,7 +16,6 @@ class LoanList extends Component {
       ucBox: this.props.ucBox,
       smsBox: this.props.smsBox
     };
-    //debugger;
     this.props.fetchLoan(boxes);
   }
 

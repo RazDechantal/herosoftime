@@ -1,5 +1,7 @@
 import React from "react";
 
+import "../../Style/app.scss";
+
 import {
   Collapse,
   Navbar,
@@ -33,19 +35,20 @@ export default class Navigation extends React.Component {
   render() {
     return (
       <div>
-        <div className="App">
+        <div>
           <Navbar light expand="md">
-            <NavbarBrand to="/">
+            <NavbarBrand>
               <img src={SRC} alt="Some text" />
             </NavbarBrand>
+
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/">Home</NavLink>
+                  <NavLink href="/app">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/Company">Companies</NavLink>
+                  <NavLink href="/app/Company">Companies</NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
@@ -53,10 +56,10 @@ export default class Navigation extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href="/Loan">Loans</NavLink>
+                      <NavLink href="/app/Loan">Loans</NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/Loan">Creditss</NavLink>
+                      <NavLink href="/app/Credit">Creditss</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>

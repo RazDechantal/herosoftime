@@ -6,5 +6,4 @@ export const readStat = () => dispatch => {
     type: READ_STAT,
     payload: null
   });
-  //debugger;
 };

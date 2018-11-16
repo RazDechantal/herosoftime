@@ -14,8 +14,6 @@ export const fetchContents = myTitle => dispatch => {
     .on(
       "value",
       function(snapshot) {
-        console.log("content action");
-        console.log(snapshot.val()[0]);
         dispatch({
           type: FETCH_CONTENTS,
           payload: snapshot.val()
@@ -25,6 +23,4 @@ export const fetchContents = myTitle => dispatch => {
         console.log("Error: " + error.code);
       }
     );
-
-  //debugger;
 };

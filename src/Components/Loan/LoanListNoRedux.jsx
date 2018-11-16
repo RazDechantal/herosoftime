@@ -3,10 +3,11 @@ import { Row, Col } from "reactstrap";
 
 // Firebase
 import fire from "../../Config/firebase";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import cloudConfig from "../../Config/cloudFirebase";
 // Css
 import "../Company/company.scss";
+import "../Checkbox/checkbox.scss";
 
 class LoanListNoRedux extends Component {
   constructor(props) {
@@ -47,9 +48,12 @@ class LoanListNoRedux extends Component {
   }
 
   handleChange(e) {
+    this.updateCompStat();
+  }
+
+  updateCompStat() {
     let currentComponent = this;
     let statusFlag = { ...this.stat };
-
     const myboxes = {
       private: document.getElementById("privateBoxId").checked,
       BadRecordCheck: document.getElementById("anmarkningBoxId").checked,
@@ -57,7 +61,6 @@ class LoanListNoRedux extends Component {
       sms: document.getElementById("smsBoxId").checked
     };
     this.boxes = myboxes;
-
     //update the status
     if (
       !this.boxes.private &&
@@ -66,7 +69,6 @@ class LoanListNoRedux extends Component {
       !this.boxes.sms
     )
       statusFlag = 0;
-
     if (this.boxes.private) statusFlag = 1;
     if (this.boxes.BadRecordCheck) statusFlag = 2;
     if (this.boxes.NoCreditCheck) statusFlag = 3;
@@ -85,13 +87,8 @@ class LoanListNoRedux extends Component {
       statusFlag = 11;
     if (this.boxes.private && this.boxes.BadRecordCheck && this.boxes.sms)
       statusFlag = 12;
-    if (
-      this.boxes.private &&
-      this.boxes.BadRecordCheck &&
-      this.boxes.NoCreditCheck
-    )
+    if (this.boxes.BadRecordCheck && this.boxes.NoCreditCheck && this.boxes.sms)
       statusFlag = 13;
-
     if (
       this.boxes.private &&
       this.boxes.BadRecordCheck &&
@@ -99,9 +96,8 @@ class LoanListNoRedux extends Component {
       this.boxes.sms
     )
       statusFlag = 14;
-
     this.stat = statusFlag;
-    currentComponent.setState({ loanlist: [] });
+    //currentComponent.setState({ loanlist: [] });
     currentComponent.getLoans();
   }
 
@@ -117,103 +113,104 @@ class LoanListNoRedux extends Component {
     switch (this.stat) {
       case 0:
         query = currentComponent.loans;
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 1:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 2:
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 3:
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 4:
         query = currentComponent.loans.where("sms", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 5:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 6:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 7:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("sms", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 8:
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 9:
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("sms", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 10:
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("sms", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 11:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 12:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("sms", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
       case 13:
-        query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
-        query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
+        query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
+        if (query) this.queries.push(query);
+        query = currentComponent.loans.where("sms", "==", "Yes");
+        if (query) this.queries.push(query);
         break;
       case 14:
         query = currentComponent.loans.where("private", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("BadRecordCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("NoCreditCheck", "==", "Yes");
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         query = currentComponent.loans.where("sms", "==", "Yes");
+        if (query) this.queries.push(query);
         break;
       default:
         query = currentComponent.loans;
-        this.queries.push(query);
+        if (query) this.queries.push(query);
         break;
     }
 
     this.tempList = [];
     for (let i = 0; i < this.queries.length; i++) {
       this.queries[i].get().then(querySnapshot => {
-        currentComponent.setState({ loanlist: [] });
+        //currentComponent.setState({ loanlist: [] });
         querySnapshot.forEach(doc => {
           this.tempList.push(doc.data());
         });
@@ -235,12 +232,18 @@ class LoanListNoRedux extends Component {
             <p>Interestrate: {loan.InterestRate}</p>
             <p>Max loan: {loan.MaxLoan}</p>
             <p>Age limit: {loan.AgeLimit}</p>
-            <p>Credit-check: {loan.CreditCheck}</p>
+            <p>Credit-check: {loan.NoCreditCheck}</p>
           </Col>
           <Col xl="4">
             <p>Min-income: {loan.MinIncome}</p>
             <p>Customer-limit: {loan.CustomerLimit}</p>
             <p>BadRecordCheck: {loan.BadRecordCheck}</p>
+            <a
+              href={loan.link}
+              className="button small applyYellow btn btn-primary btn-block"
+            >
+              Se erbjudande
+            </a>
           </Col>
         </Row>
         <hr />
@@ -252,55 +255,55 @@ class LoanListNoRedux extends Component {
         <div className="item-categories">
           <div className="item-heading">Sortera olika lån</div>
           <div className="checkboxFive">
-            <input
-              type="checkbox"
-              id="privateBoxId"
-              defaultChecked={this.boxes.private}
-              name="private"
-              className="tag-check"
-              onChange={this.handleChange}
-            />
             <label id="Privatln" className="tag-container">
+              <input
+                type="checkbox"
+                id="privateBoxId"
+                defaultChecked={this.boxes.private}
+                name="private"
+                className="tag-check"
+                onChange={this.handleChange}
+              />
               Privatlån
             </label>
-            <input
-              type="checkbox"
-              id="anmarkningBoxId"
-              defaultChecked={this.boxes.BadRecordCheck}
-              name="BadRecordCheck"
-              className="tag-check"
-              onChange={this.handleChange}
-            />
             <label id="Lnmedbetalningsanmrkning" className="tag-container">
-              Lån med betalningsanmärkning
+              <input
+                type="checkbox"
+                id="anmarkningBoxId"
+                defaultChecked={this.boxes.BadRecordCheck}
+                name="BadRecordCheck"
+                className="tag-check"
+                onChange={this.handleChange}
+              />
+              Betalningsanmärkning
             </label>
-            <input
-              type="checkbox"
-              id="ucBoxId"
-              defaultChecked={this.boxes.NoCreditCheck}
-              name="NoCreditCheck"
-              className="tag-check"
-              onChange={this.handleChange}
-            />
             <label id="LnutanUC" className="tag-container">
-              Lån utan UC
+              <input
+                type="checkbox"
+                id="ucBoxId"
+                defaultChecked={this.boxes.NoCreditCheck}
+                name="NoCreditCheck"
+                className="tag-check"
+                onChange={this.handleChange}
+              />
+              Utan UC
             </label>
-            <input
-              type="checkbox"
-              id="smsBoxId"
-              defaultChecked={this.boxes.sms}
-              name="sms"
-              className="tag-check"
-              onChange={this.handleChange}
-            />
             <label id="Smslnmeddirektutbetalning" className="tag-container">
-              Smslån med direktutbetalning
+              <input
+                type="checkbox"
+                id="smsBoxId"
+                defaultChecked={this.boxes.sms}
+                name="sms"
+                className="tag-check"
+                onChange={this.handleChange}
+              />
+              Smslån
             </label>
           </div>
         </div>
 
         <div>
-          <h2 className="secondtitle">Compare loans</h2>
+          <h2 className="secondtitle">Bäst möjligheter</h2>
           <hr />
         </div>
         <div>{loanitems}</div>

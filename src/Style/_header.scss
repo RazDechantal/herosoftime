@@ -34,3 +34,31 @@
   overflow: hidden;
   box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08);
 }
+
+@media (max-width: 820px) {
+  .header-slogan h1 {
+    font-size: 24px;
+    color: rgb(29, 26, 24);
+    margin-left: 1%;
+    text-align: center;
+  }
+
+  .header-slogan {
+    font-size: 24px;
+    color: rgb(29, 26, 24);
+    text-align: center;
+  }
+}
+@media (max-width: 321px) {
+  .header-main {
+    background-image: url("../Static/img/header/header01.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .header-slogan h1 {
+    font-size: 24px;
+    color: rgb(29, 26, 24);
+    margin-left: 1%;
+    text-align: center;
+  }
+}

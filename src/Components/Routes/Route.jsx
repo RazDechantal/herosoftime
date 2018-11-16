@@ -9,20 +9,19 @@ import NotFoundPage from "../../Pages/NotFoundPage";
 class MyRoutes extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <BrowserRouter>
-            <div className="App">
-              <Switch>
-                <Route path="/" activeClass={true} component={Home} exact />
-                <Route path="/Company" activeClass={true} component={Company} />
-                <Route path="/Loan" activeClass={true} component={Loan} />
-                <Route component={NotFoundPage} />
-              </Switch>
-            </div>
-          </BrowserRouter>
-        </div>
-      </BrowserRouter>
+      <div className="App">
+        <BrowserRouter basename="/app">
+          <div className="App">
+            <Switch>
+              <Route path="/" activeClass={true} component={Home} exact />
+              <Route path="/Home" activeClass={true} component={Home} />
+              <Route path="/Loan" activeClass={true} component={Loan} />
+              <Route path="/Company" activeClass={true} component={Company} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </div>
     );
   }
 }

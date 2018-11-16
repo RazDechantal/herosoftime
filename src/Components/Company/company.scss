@@ -1,4 +1,4 @@
-$border-color: #ffb112;
+$border-color: #e9e4d9;
 $decoration-h3-color: darksalmon;
 $decoration-hover: lightgray;
 
@@ -6,9 +6,15 @@ $decoration-hover: lightgray;
   text-align: center;
 }
 .decoration {
-  border: 2px solid $border-color;
-  margin: 3%;
+  text-align: center;
+  /*border: 2px solid $border-color;*/
   padding: 2%;
+  width: 90%;
+  opacity: 0.7;
+  transform: scale(1.1);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
 }
 
 .decoration h3 {
@@ -16,7 +22,9 @@ $decoration-hover: lightgray;
 }
 
 .decoration:hover {
-  background-color: $decoration-hover;
+  margin-left: -50px;
+  width: 100%;
+  opacity: 1;
 }
 
 .secondtitle,

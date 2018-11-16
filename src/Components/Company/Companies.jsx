@@ -4,26 +4,61 @@ import PropTypes from "prop-types";
 import { fetchCompanies } from "../../Action/companyAction";
 import { readStat } from "../../Action/appReadStat";
 
+import { Row, Col } from "reactstrap";
 import "../Company/company.scss";
 
 class Companies extends Component {
+  constructor(props) {
+    super(props);
+    this.btnClick = this.btnClick.bind(this);
+  }
   componentWillMount() {
-    this.props.fetchCompanies();
+    this.props.fetchCompanies(this.props.present, this.props.loanPeriod);
     this.props.readStat();
   }
+
+  btnClick() {
+    this.props.fetchCompanies(this.props.present, this.props.loanPeriod);
+  }
   render() {
-    const companyitems = this.props.companies.map(company => (
-      <div key={company.id} className="decoration">
-        <h3>{company.company}</h3>
-        <p>Field: {company.Field}</p>
-        <p>Type: {company.Type}</p>
-        <p>Speciality: {company.Speciality}</p>
+    const companyitems = this.props.companies.map(loan => (
+      <div key={loan.id} className="decoration">
+        <Row>
+          <Col xs="4">
+            <img src={loan.logo} alt="" />
+          </Col>
+          <Col xl="4">
+            <p>Interestrate: {loan.InterestRate}</p>
+            <p>Max loan: {loan.MaxLoan}</p>
+            <p>Age limit: {loan.AgeLimit}</p>
+            <p>Credit-check: {loan.NoCreditCheck}</p>
+          </Col>
+          <Col xl="4">
+            <p>Min-income: {loan.MinIncome}</p>
+            <p>Customer-limit: {loan.CustomerLimit}</p>
+            <p>BadRecordCheck: {loan.BadRecordCheck}</p>
+            <a
+              href={loan.link}
+              className="button small applyYellow btn btn-primary btn-block"
+            >
+              Se erbjudande
+            </a>
+          </Col>
+        </Row>
         <hr />
       </div>
     ));
     return (
       <div>
-        <h1 className="title">Companies</h1>
+        <button
+          type="submit"
+          disabled={this.buttonActive}
+          className="btn btn-primary btn-lg btn-block"
+          onClick={this.btnClick}
+        >
+          Jämför lån
+        </button>
+        <hr />
         {companyitems}
       </div>
     );
@@ -39,6 +74,8 @@ Companies.propTypes = {
 const mapStateToProps = state => ({
   companies: state.companies.items,
   loanSum: state.app.loanSum,
+  loanPresent: state.app.loanPresent,
+  present: state.app.present,
   loanPeriod: state.app.loanPeriod,
   yearMin: state.app.yearMin,
   yearMAx: state.app.yearMAx
