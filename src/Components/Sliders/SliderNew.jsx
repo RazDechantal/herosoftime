@@ -37,7 +37,9 @@ class SliderNew extends Component {
   render() {
     return (
       <div>
-        <label>Lånebelopp</label>
+        <label>
+          <h3>Lånebelopp</h3>
+        </label>
         <Input
           type="number"
           value={this.props.present}
@@ -46,6 +48,7 @@ class SliderNew extends Component {
           step={this.props.present < 9500 ? 500 : 10000}
         />
         <br />
+
         <Slider
           value={this.props.present}
           step={this.props.present < 10000 ? 500 : 10000}
@@ -53,9 +56,21 @@ class SliderNew extends Component {
           min={this.props.min}
           max={this.props.max}
           onChange={this.onSliderChange}
+          trackStyle={{ backgroundColor: "lightgreen", height: 10 }}
+          handleStyle={{
+            borderColor: "lightgreen",
+            height: 28,
+            width: 28,
+            marginLeft: -14,
+            marginTop: -9,
+            backgroundColor: "black"
+          }}
+          railStyle={{ backgroundColor: "#85bb35", height: 10 }}
         />
         <br />
-        <label>Years</label>
+        <label>
+          <h3>Års</h3>
+        </label>
         <Input
           type="number"
           value={this.props.loanPeriod}
@@ -66,6 +81,7 @@ class SliderNew extends Component {
           max={10}
         />
         <br />
+
         <Slider
           value={this.props.loanPeriod}
           step={1}
@@ -74,6 +90,16 @@ class SliderNew extends Component {
           min={this.props.yearMin}
           max={this.props.yearMAx}
           onChange={this.onTimeSliderChange}
+          trackStyle={{ backgroundColor: "lightgreen", height: 10 }}
+          handleStyle={{
+            borderColor: "blue",
+            height: 28,
+            width: 28,
+            marginLeft: -14,
+            marginTop: -9,
+            backgroundColor: "black"
+          }}
+          railStyle={{ backgroundColor: "#85bb35", height: 10 }}
         />
         <br />
       </div>

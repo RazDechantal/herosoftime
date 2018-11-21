@@ -231,7 +231,7 @@ class LoanListNoRedux extends Component {
           <Col xl="4">
             <p>Interestrate: {loan.InterestRate}</p>
             <p>Max loan: {loan.MaxLoan}</p>
-            <p>Age limit: {loan.AgeLimit}</p>
+            <p>Max period: {loan.MaxPer}</p>
             <p>Credit-check: {loan.NoCreditCheck}</p>
           </Col>
           <Col xl="4">

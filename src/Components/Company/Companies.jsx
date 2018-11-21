@@ -13,12 +13,20 @@ class Companies extends Component {
     this.btnClick = this.btnClick.bind(this);
   }
   componentWillMount() {
-    this.props.fetchCompanies(this.props.present, this.props.loanPeriod);
+    var filter = {
+      loanSum: this.props.present,
+      loanPeriod: this.props.loanPeriod
+    };
+    this.props.fetchCompanies(filter);
     this.props.readStat();
   }
 
   btnClick() {
-    this.props.fetchCompanies(this.props.present, this.props.loanPeriod);
+    var filter = {
+      loanSum: this.props.present,
+      loanPeriod: this.props.loanPeriod
+    };
+    this.props.fetchCompanies(filter);
   }
   render() {
     const companyitems = this.props.companies.map(loan => (
@@ -30,7 +38,7 @@ class Companies extends Component {
           <Col xl="4">
             <p>Interestrate: {loan.InterestRate}</p>
             <p>Max loan: {loan.MaxLoan}</p>
-            <p>Age limit: {loan.AgeLimit}</p>
+            <p>Max Period: {loan.MaxPer}</p>
             <p>Credit-check: {loan.NoCreditCheck}</p>
           </Col>
           <Col xl="4">
@@ -56,7 +64,7 @@ class Companies extends Component {
           className="btn btn-primary btn-lg btn-block"
           onClick={this.btnClick}
         >
-          Jämför lån
+          <h1>Jämför lån</h1>
         </button>
         <hr />
         {companyitems}

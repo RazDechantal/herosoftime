@@ -39,7 +39,7 @@ class Footer extends Component {
               <div className="contact">
                 <a
                   href="https://m.facebook.com/helphero/"
-                  class="fa fa-facebook"
+                  className="fa fa-facebook"
                 />
               </div>
             </div>
@@ -49,11 +49,14 @@ class Footer extends Component {
               <h2>Kontakta oss</h2>
               <hr />
               <div className="contact">
-                <a class="fa fa-phone">&nbsp;&nbsp; </a>
+                <a className="fa fa-phone"> </a>
                 08232232
               </div>
               <div className="contact">
-                <a href="mailto:kontakt@helphero.se" class="fa fa-envelope" />
+                <a
+                  href="mailto:kontakt@helphero.se"
+                  className="fa fa-envelope"
+                />
               </div>
             </div>
           </Col>
