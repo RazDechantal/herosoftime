@@ -63,6 +63,19 @@ export default class Navigation extends React.Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    My page
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <NavLink href="/app/Login">Login</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="/app/Setting">Setting</NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </Nav>
             </Collapse>
           </Navbar>
