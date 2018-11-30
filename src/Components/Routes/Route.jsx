@@ -5,7 +5,7 @@ import Home from "../../Pages/Home";
 import Company from "../../Pages/CompanyPage";
 import Loan from "../../Pages/Loan";
 import Login from "../../Components/Login/Login";
-import Setting from "../../Components/Setting/Setting";
+import Admin from "../../Components/Aministration/Admin";
 import NotFoundPage from "../../Pages/NotFoundPage";
 
 class MyRoutes extends Component {
@@ -20,7 +20,7 @@ class MyRoutes extends Component {
               <Route path="/Loan" activeClass={true} component={Loan} />
               <Route path="/Company" activeClass={true} component={Company} />
               <Route path="/Login" activeClass={true} component={Login} />
-              <Route path="/Setting" activeClass={true} component={Setting} />
+              <Route path="/Admin" activeClass={true} component={Admin} />
               <Route component={NotFoundPage} />
             </Switch>
           </div>

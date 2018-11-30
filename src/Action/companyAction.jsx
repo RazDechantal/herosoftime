@@ -1,16 +1,17 @@
-import { FETCH_COMPANIES } from "../Action/types";
-import { WRITE_MONEY_STAT } from "../Action/types";
+import {
+  FETCH_COMPANIES,
+  WRITE_MONEY_STAT,
+  FETCH_ONE_COMPANY
+} from "../Action/types";
 
 // Firebase
 import firebase from "firebase";
 import cloudConfig from "../Config/cloudFirebase";
 
 // Retreiving the info from backend and dispatching to the store
-export const fetchCompanies = filter => dispatch => {
+export const companyAction = filter => dispatch => {
   const loanList = [];
   const tempList = [];
-
-  var queries = [];
 
   var db = firebase.firestore(cloudConfig);
   db.settings({

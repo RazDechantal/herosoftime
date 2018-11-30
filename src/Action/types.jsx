@@ -8,11 +8,15 @@ export const WRITE_BOX_STAT = "WRITE_BOX_STAT";
 export const FETCH_COMPANIES = "FETCH_COMPANIES";
 export const NEW_COMPANY = "NEW_COMPANY";
 export const FETCH_ONE_COMPANY = "FETCH_ONE_COMPANY";
+export const WRITE_COMPANY = "WRITE_COMPANY";
 
 export const FETCH_LOAN = "FETCH_LOAN";
 export const NEW_LOAN = "NEW_LOAN";
 export const FETCH_ONE_LOAN = "FETCH_ONE_LOAN";
 
+export const USER_LOGGED = "USER_LOGGED";
+export const ADD_USER = "ADD_USER";
+export const FETCH_USER = "FETCH_USER";
 export const FETCH_USERS = "FETCH_USERS";
 export const NEW_USER = "NEW_USER";
 

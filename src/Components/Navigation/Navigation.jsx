@@ -1,6 +1,10 @@
 import React from "react";
 
 import "../../Style/app.scss";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { fetchUser } from "../../Action/fetchUser";
 
 import {
   Collapse,
@@ -18,19 +22,28 @@ import {
 
 import SRC from "../../Static/img/Logo01.png";
 
-export default class Navigation extends React.Component {
+class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      email: this.props.userState.email
     };
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  componentWillMount() {
+    fetchUser();
+  }
+
+  componentDidMount() {
+    this.setState({ email: this.props.userState.email });
   }
   render() {
     return (
@@ -40,7 +53,8 @@ export default class Navigation extends React.Component {
             <NavbarBrand>
               <img src={SRC} alt="Some text" />
             </NavbarBrand>
-
+            {"You are logged in as: "}
+            {this.props.user.email}
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
@@ -69,10 +83,13 @@ export default class Navigation extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href="/app/Login">Login</NavLink>
+                      <NavLink href="/app/Login">
+                        {" "}
+                        {this.props.loggedIn ? "Logg out" : "Logg in"}{" "}
+                      </NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/app/Setting">Setting</NavLink>
+                      <NavLink href="/app/Admin">Admin</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -84,3 +101,20 @@ export default class Navigation extends React.Component {
     );
   }
 }
+
+Navigation.propTypes = {
+  fetchUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  userState: PropTypes.object.isRequired,
+  loggedIn: PropTypes.any.isRequired
+};
+
+const mapStateToProps = state => ({
+  userState: state.users,
+  user: state.users.user,
+  loggedIn: state.users.loggedIn
+});
+export default connect(
+  mapStateToProps,
+  { fetchUser }
+)(Navigation);
