@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Form, FormGroup, Label, input } from "reactstrap";
+import { Input, Row, Col, Button, Form, FormGroup, Label } from "reactstrap";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -27,25 +27,15 @@ class MyModal extends Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.saveModalDetails = this.saveModalDetails.bind(this);
 
     /*this.state = {
       currencies: []
     };*/
     this.state = {
-      company: "",
-      InterestRate: 0,
-      MaxLoan: 0,
-      MaxPer: 0,
-      MonthlyPayment: 0,
-      TotalExpense: 0,
-      AgeLimit: 0,
-      MinIncome: 0,
-      CustomerLimit: "Yes",
-      BadRecordCheck: "Yes",
-      logo: "",
-      private: "Yes",
-      sms: "Yes",
-      link: "Yes"
+      requiredItem: 0,
+      modalIsOpen: false,
+      editPressed: false
     };
   }
 
@@ -58,6 +48,8 @@ class MyModal extends Component {
       msg: nextProps.msg
     });
   }
+
+  saveModalDetails(e) {}
 
   openModal() {
     this.setState({ modalIsOpen: true });
@@ -90,142 +82,214 @@ class MyModal extends Component {
   }
 
   render() {
+    //alert(this.props.test);
     return (
       <div>
-        <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
-        <form>
-          <Label for="exampleNumber">Company</Label>
-          <input
-            type="text"
-            name="company"
-            id="companyid"
-            placeholder="Enter the name of the company"
-            value={this.state.company}
-            onChange={e => this.companyHandler(e)}
-          />
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          InterestRate={3.5}
+          MaxLoan={150000}
+          MaxPer={15}
+          MonthlyPayment={8888}
+          TotalExpense={""}
+          AgeLimit={22}
+          NoCreditCheck={"Yes"}
+          MinIncome={"100000"}
+          CustomerLimit={"No"}
+          BadRecordCheck={"No"}
+          logo={"Logo"}
+          private={"Private"}
+          sms={"sms"}
+          link={"link"}
+          contentLabel="Example Modal"
+        >
+          <h2 ref={subtitle => (this.subtitle = subtitle)}>Modify</h2>
+          <Form onSubmit={this.saveModalDetails}>
+            <FormGroup>
+              <Label for="exampleNumber">Company</Label>
+              <Input
+                type="text"
+                name="company"
+                id="companyid"
+                placeholder="Enter the name of the company"
+                value={this.props.company}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleSelect">Private Loan</Label>
-          <input
-            type="select"
-            name="private"
-            id="privateloanid"
-            value={this.state.private}
-            onChange={e => this.companyHandler(e)}
-          >
-            <option>Yes</option>
-            <option>No</option>
-          </input>
+            <FormGroup>
+              <Label for="exampleSelect">Private Loan</Label>
+              <Input
+                type="select"
+                name="private"
+                id="privateloanid"
+                value={this.props.private}
+                onChange={e => this.companyHandler(e)}
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </Input>
+            </FormGroup>
 
-          <Label for="exampleSelect">SMS Loan</Label>
-          <input
-            type="select"
-            name="sms"
-            id="smsid"
-            value={this.state.sms}
-            onChange={e => this.companyHandler(e)}
-          >
-            <option>Yes</option>
-            <option>No</option>
-          </input>
+            <FormGroup>
+              <Label for="exampleSelect">SMS Loan</Label>
+              <Input
+                type="select"
+                name="sms"
+                id="smsid"
+                value={this.props.sms}
+                onChange={e => this.companyHandler(e)}
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </Input>
+            </FormGroup>
 
-          <Label for="exampleSelect">Customer limit</Label>
-          <input
-            type="number"
-            name="CustomerLimit"
-            id="customerlimitid"
-            placeholder="Customer limit"
-            step={1000}
-            value={this.state.CustomerLimit}
-            onChange={e => this.companyHandler(e)}
-          />
+            <FormGroup>
+              <Label for="exampleSelect">Customer limit</Label>
+              <Input
+                type="select"
+                name="CustomerLimit"
+                id="customerlimitid"
+                value={this.props.CustomerLimit}
+                onChange={e => this.companyHandler(e)}
+              >
+                <option>Yes</option>
+                <option>None</option>
+              </Input>
+            </FormGroup>
 
-          <Label for="exampleSelect">Age limit</Label>
-          <input
-            type="number"
-            name="AgeLimit"
-            id="agelimitid"
-            step={1}
-            min={16}
-            max={100}
-            placeholder="Set Age limit"
-            value={this.state.AgeLimit}
-            onChange={e => this.companyHandler(e)}
-          />
+            <FormGroup>
+              <Label for="exampleSelect">Age limit</Label>
+              <Input
+                type="number"
+                name="AgeLimit"
+                id="agelimitid"
+                step={1}
+                min={16}
+                max={100}
+                placeholder="Set Age limit"
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleUrl">Logo</Label>
-          <input
-            type="text"
-            name="logo"
-            id="logoid"
-            placeholder="Logo here!"
-            value={this.state.logo}
-            onChange={e => this.companyHandler(e)}
-          />
+            <FormGroup>
+              <Label for="exampleUrl">Logo</Label>
+              <Input
+                type="text"
+                name="logo"
+                id="logoid"
+                placeholder="Logo here!"
+                value={this.props.logo}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleNumber">Interest rate</Label>
-          <input
-            type="number"
-            name="interestrate"
-            id="interestrateid"
-            step={0.1}
-            placeholder="Interest Rate"
-          />
+            <FormGroup>
+              <Label for="exampleNumber">Interest rate</Label>
+              <Input
+                type="number"
+                name="InterestRate"
+                id="interestrateid"
+                step={0.1}
+                placeholder="Interest Rate"
+                value={this.props.InterestRate}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleNumber">Max Loan</Label>
-          <input
-            type="number"
-            name="maxloan"
-            id="maxloanid"
-            step={this.state.maxloanstep < 9500 ? 500 : 10000}
-            placeholder="Max Loan"
-          />
+            <FormGroup>
+              <Label for="exampleNumber">Max Loan</Label>
+              <Input
+                type="number"
+                name="MaxLoan"
+                id="maxloanid"
+                step={this.props.maxloanstep < 9500 ? 500 : 10000}
+                max={1000000}
+                placeholder="Max Loan"
+                value={this.props.MaxLoan}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleNumber">Max Period</Label>
-          <input
-            type="number"
-            name="maxperiod"
-            id="maxperiodid"
-            step={1}
-            min={3}
-            max={180}
-            placeholder="Max period in month"
-          />
+            <FormGroup>
+              <Label for="exampleNumber">Max Period</Label>
+              <Input
+                type="number"
+                name="MaxPer"
+                id="maxperiodid"
+                step={1}
+                min={3}
+                max={180}
+                placeholder="Max period in month"
+                value={this.props.MaxPer}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleSelect">Credit Check</Label>
-          <input type="select" name="credit check" id="creditcheckid">
-            <option>Yes</option>
-            <option>No</option>
-          </input>
+            <FormGroup>
+              <Label for="exampleSelect">Credit Check</Label>
+              <Input
+                type="select"
+                name="BadRecordCheck"
+                id="creditcheckid"
+                value={this.props.BadRecordCheck}
+                onChange={e => this.companyHandler(e)}
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </Input>
+            </FormGroup>
 
-          <Label for="exampleSelect">Minimum Income</Label>
-          <input type="select" name="minincome" id="minincomeid">
-            <option>100000-200000</option>
-            <option>200000-300000</option>
-            <option>300000-400000</option>
-            <option>400000-500000</option>
-            <option>more than 500000</option>
-          </input>
+            <FormGroup>
+              <Label for="exampleSelect">Minimum Income</Label>
+              <Input
+                type="number"
+                name="MinIncome"
+                id="minincomeid"
+                step={10000}
+                min={100000}
+                max={1000000}
+                value={this.props.MinIncome}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleUrl">Link</Label>
+              <Input
+                type="text"
+                name="link"
+                id="linkid"
+                placeholder="Link to bank"
+                value={this.props.link}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleUrl">Logo</Label>
+              <Input
+                type="text"
+                name="logo"
+                id="logoid"
+                placeholder="Logo here!"
+                value={this.props.logo}
+                onChange={e => this.companyHandler(e)}
+              />
+            </FormGroup>
 
-          <Label for="exampleUrl">Link</Label>
-          <input
-            type="text"
-            name="link"
-            id="linkid"
-            placeholder="Link to bank"
-          />
-
-          <Label for="exampleSelect">Customer limit</Label>
-          <input type="select" name="credit check" id="customerlimit">
-            <option>Yes</option>
-            <option>No</option>
-          </input>
-
-          <Label for="exampleUrl">Logo</Label>
-          <input type="text" name="logo" id="logoid" placeholder="Logo here!" />
-
-          <button>Save changes</button>
-          <button onClick={this.closeModal}>close</button>
-        </form>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              data-dismiss="modal"
+            >
+              Save changes
+            </button>
+            <button onClick={this.closeModal}>close</button>
+          </Form>
+        </Modal>
       </div>
     );
   }

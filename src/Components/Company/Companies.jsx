@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { companyAction } from "../../Action/companyAction";
 import { readWriteCompany } from "../../Action/readWriteCompany";
 import { readStat } from "../../Action/appReadStat";
-
+import Test from "../Test/Test";
+import TestX from "../Test/TestX";
 // Firebase
 import firebase from "firebase/app";
 import cloudConfig from "../../Config/cloudFirebase";
@@ -12,7 +13,8 @@ import cloudConfig from "../../Config/cloudFirebase";
 import "../Company/company.scss";
 
 //Modal
-import Modal from "react-modal";
+//import Modal from "react-modal";
+import MyModal from "../Modal/Modal";
 
 import { Form, FormGroup, Row, Col, Button, Label, Input } from "reactstrap";
 
@@ -33,7 +35,7 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#root");
+//Modal.setAppElement("#root");
 
 class Companies extends Component {
   constructor(props) {
@@ -49,7 +51,7 @@ class Companies extends Component {
     this.saveModalDetails = this.saveModalDetails.bind(this);
 
     this.state = {
-      requiredItem: 0,
+      requiredItem: 9999,
       modalIsOpen: false,
       editPressed: false,
       loan: {
@@ -103,6 +105,8 @@ class Companies extends Component {
   }
 
   replaceModalItem(newLoan) {
+    debugger;
+    this.setState({ requiredItem: newLoan.id });
     this.setState({ modalIsOpen: true });
     this.setState({ loan: newLoan });
   }
@@ -110,12 +114,12 @@ class Companies extends Component {
   companyHandler(e) {
     e.stopPropagation();
     this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state.requiredItem);
+      console.log(this.state.loan);
     });
     var v = e.target.value;
     var test = this.state;
     console.log(this.state.loan);
-    //debugger;
+    debugger;
   }
 
   saveModalDetails(e) {
@@ -144,45 +148,59 @@ class Companies extends Component {
   }
 
   render() {
-    const companyitems = this.props.companies.map(loan => (
-      <div key={loan.id} className="decoration">
-        <Row>
-          <Col xs="4">
-            <img src={loan.logo} alt="" />
-            <div>
-              <Button
-                color="warning"
-                onClick={() => this.replaceModalItem(loan)}
-              >
-                Edit
-              </Button>
-              <Button color="danger">Delete</Button> <hr />
-              {companyitems}
-            </div>
-          </Col>
-          <Col xl="4">
-            <p>Interestrate: {loan.InterestRate}</p>
-            <p>Max loan: {loan.MaxLoan}</p>
-            <p>Max Period: {loan.MaxPer}</p>
-            <p>Credit-check: {loan.NoCreditCheck}</p>
-          </Col>
-          <Col xl="4">
-            <p>Min-income: {loan.MinIncome}</p>
-            <p>Customer-limit: {loan.CustomerLimit}</p>
-            <p>BadRecordCheck: {loan.BadRecordCheck}</p>
-            <a
-              href={loan.link}
-              className="button small applyYellow btn btn-primary btn-block"
-            >
-              Se erbjudande
-            </a>
-          </Col>
-        </Row>
-        <hr />
-      </div>
-    ));
+    const test = [];
+    const companyitems = this.props.companies.map(
+      loan => (
+        test.push(loan),
+        (
+          <div key={loan.id} className="decoration">
+            <Row>
+              <Col xs="4">
+                <img src={loan.logo} alt="" />
+                <div>
+                  <Button
+                    color="warning"
+                    onClick={() => this.replaceModalItem(loan)}
+                  >
+                    Edit
+                  </Button>
+                  <Button color="danger">Delete</Button> <hr />
+                  {companyitems}
+                </div>
+              </Col>
+              <Col xl="4">
+                <p>Interestrate: {loan.InterestRate}</p>
+                <p>Max loan: {loan.MaxLoan}</p>
+                <p>Max Period: {loan.MaxPer}</p>
+                <p>Credit-check: {loan.NoCreditCheck}</p>
+              </Col>
+              <Col xl="4">
+                <p>Min-income: {loan.MinIncome}</p>
+                <p>Customer-limit: {loan.CustomerLimit}</p>
+                <p>BadRecordCheck: {loan.BadRecordCheck}</p>
+                <a
+                  href={loan.link}
+                  className="button small applyYellow btn btn-primary btn-block"
+                >
+                  Se erbjudande
+                </a>
+              </Col>
+            </Row>
+            <hr />
+          </div>
+        )
+      )
+    );
     const requiredItem = this.state.requiredItem;
-    let modalData = companyitems[requiredItem];
+    debugger;
+    let modalData = test[requiredItem];
+    if (modalData) {
+      console.log(requiredItem);
+      console.log(test);
+      console.log(modalData.company);
+    } else {
+      console.log("Not heat!");
+    }
     return (
       <div>
         <button
@@ -197,11 +215,8 @@ class Companies extends Component {
         {companyitems}
 
         {modalData ? (
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
+          <Test
+            company={modalData.company}
             InterestRate={modalData.InterestRate}
             MaxLoan={modalData.MaxPer}
             MaxPer={modalData.MaxPer}
@@ -217,192 +232,8 @@ class Companies extends Component {
             sms={modalData.sms}
             link={modalData.link}
             contentLabel="Example Modal"
-          >
-            <h2 ref={subtitle => (this.subtitle = subtitle)}>Modify</h2>
-            <Form onSubmit={this.saveModalDetails}>
-              <FormGroup>
-                <Label for="exampleNumber">Company</Label>
-                <Input
-                  type="text"
-                  name="company"
-                  id="companyid"
-                  placeholder="Enter the name of the company"
-                  value={this.state.loan.company}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleSelect">Private Loan</Label>
-                <Input
-                  type="select"
-                  name="private"
-                  id="privateloanid"
-                  value={this.state.loan.private}
-                  onChange={e => this.companyHandler(e)}
-                >
-                  <option>Yes</option>
-                  <option>No</option>
-                </Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleSelect">SMS Loan</Label>
-                <Input
-                  type="select"
-                  name="sms"
-                  id="smsid"
-                  value={this.state.loan.sms}
-                  onChange={e => this.companyHandler(e)}
-                >
-                  <option>Yes</option>
-                  <option>No</option>
-                </Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleSelect">Customer limit</Label>
-                <Input
-                  type="select"
-                  name="CustomerLimit"
-                  id="customerlimitid"
-                  value={this.state.loan.CustomerLimit}
-                  onChange={e => this.companyHandler(e)}
-                >
-                  <option>Yes</option>
-                  <option>None</option>
-                </Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleSelect">Age limit</Label>
-                <Input
-                  type="number"
-                  name="AgeLimit"
-                  id="agelimitid"
-                  step={1}
-                  min={16}
-                  max={100}
-                  placeholder="Set Age limit"
-                  value={this.state.loan.AgeLimit}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleUrl">Logo</Label>
-                <Input
-                  type="text"
-                  name="logo"
-                  id="logoid"
-                  placeholder="Logo here!"
-                  value={this.state.loan.logo}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleNumber">Interest rate</Label>
-                <Input
-                  type="number"
-                  name="InterestRate"
-                  id="interestrateid"
-                  step={0.1}
-                  placeholder="Interest Rate"
-                  value={this.state.loan.InterestRate}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleNumber">Max Loan</Label>
-                <Input
-                  type="number"
-                  name="MaxLoan"
-                  id="maxloanid"
-                  step={this.state.loan.maxloanstep < 9500 ? 500 : 10000}
-                  max={1000000}
-                  placeholder="Max Loan"
-                  value={this.state.loan.MaxLoan}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleNumber">Max Period</Label>
-                <Input
-                  type="number"
-                  name="MaxPer"
-                  id="maxperiodid"
-                  step={1}
-                  min={3}
-                  max={180}
-                  placeholder="Max period in month"
-                  value={this.state.loan.MaxPer}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleSelect">Credit Check</Label>
-                <Input
-                  type="select"
-                  name="BadRecordCheck"
-                  id="creditcheckid"
-                  value={this.state.loan.BadRecordCheck}
-                  onChange={e => this.companyHandler(e)}
-                >
-                  <option>Yes</option>
-                  <option>No</option>
-                </Input>
-              </FormGroup>
-
-              <FormGroup>
-                <Label for="exampleSelect">Minimum Income</Label>
-                <Input
-                  type="number"
-                  name="MinIncome"
-                  id="minincomeid"
-                  step={10000}
-                  min={100000}
-                  max={1000000}
-                  value={this.state.loan.MinIncome}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleUrl">Link</Label>
-                <Input
-                  type="text"
-                  name="link"
-                  id="linkid"
-                  placeholder="Link to bank"
-                  value={this.state.loan.link}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleUrl">Logo</Label>
-                <Input
-                  type="text"
-                  name="logo"
-                  id="logoid"
-                  placeholder="Logo here!"
-                  value={this.state.loan.logo}
-                  onChange={e => this.companyHandler(e)}
-                />
-              </FormGroup>
-
-              <button
-                type="submit"
-                className="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Save changes
-              </button>
-              <button onClick={this.closeModal}>close</button>
-            </Form>
-          </Modal>
+            openModal={true}
+          />
         ) : null}
       </div>
     );
