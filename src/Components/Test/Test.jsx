@@ -54,8 +54,6 @@ export default class Test extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 ref={subtitle => (this.subtitle = subtitle)}>Hello</h2>
-          <button onClick={this.closeModal}>close</button>
           <h2 ref={subtitle => (this.subtitle = subtitle)}>Modify</h2>
           <Form onSubmit={this.saveModalDetails}>
             <FormGroup>
@@ -122,6 +120,7 @@ export default class Test extends Component {
                 min={16}
                 max={100}
                 placeholder="Set Age limit"
+                value={this.props.AgeLimit}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>

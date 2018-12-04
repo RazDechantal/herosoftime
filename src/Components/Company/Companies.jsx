@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { companyAction } from "../../Action/companyAction";
 import { readWriteCompany } from "../../Action/readWriteCompany";
 import { readStat } from "../../Action/appReadStat";
+import { fetchUser } from "../../Action/fetchUser";
+
 import Test from "../Test/Test";
 import TestX from "../Test/TestX";
 // Firebase
@@ -54,6 +56,7 @@ class Companies extends Component {
       requiredItem: 9999,
       modalIsOpen: false,
       editPressed: false,
+      deleted: false,
       loan: {
         id: 0,
         company: "test",
@@ -104,11 +107,11 @@ class Companies extends Component {
     this.props.companyAction(filter);
   }
 
-  replaceModalItem(newLoan) {
-    debugger;
-    this.setState({ requiredItem: newLoan.id });
+  replaceModalItem(loan) {
+    //debugger;
+    this.setState({ requiredItem: loan.id });
     this.setState({ modalIsOpen: true });
-    this.setState({ loan: newLoan });
+    this.setState({ loan: loan });
   }
 
   companyHandler(e) {
@@ -119,32 +122,36 @@ class Companies extends Component {
     var v = e.target.value;
     var test = this.state;
     console.log(this.state.loan);
-    debugger;
+    //debugger;
   }
 
-  saveModalDetails(e) {
-    e.preventDefault();
-    var record = this.state.loan;
-    var myDoc = record.company;
-    var Loan = db.collection("Loans").doc(myDoc);
-    record.company = "A new name";
-
-    //debugger;
-    // Set the "capital" field of the city 'DC'
-    return Loan.update({
-      myDoc: record
-    })
+  saveModalDetails(item) {
+    var docRef = db.collection("Loans").doc(item.company);
+    docRef
+      .update(item)
       .then(function() {
         console.log("Document successfully updated!");
-        //this.setState({ modalIsOpen: false });
+        console.log(docRef);
       })
       .catch(function(error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
         //this.setState({ [this.state.modalIsOpen]: false });
       });
+  }
 
-    //console.log(item.company);
+  deleteItem(loan) {
+    //debugger;
+    db.collection("Loans")
+      .doc(loan.company)
+      .delete()
+      .then(function() {
+        console.log("Document successfully deleted!");
+        this.setState({ deleted: true });
+      })
+      .catch(function(error) {
+        console.error("Error removing document: ", error);
+      });
   }
 
   render() {
@@ -159,12 +166,20 @@ class Companies extends Component {
                 <img src={loan.logo} alt="" />
                 <div>
                   <Button
+                    hidden={this.props.loggedIn ? "" : "hidden"}
                     color="warning"
                     onClick={() => this.replaceModalItem(loan)}
                   >
                     Edit
                   </Button>
-                  <Button color="danger">Delete</Button> <hr />
+                  <Button
+                    hidden={this.props.loggedIn ? "" : "hidden"}
+                    color="danger"
+                    onClick={() => this.deleteItem(loan)}
+                  >
+                    Delete
+                  </Button>{" "}
+                  <hr />
                   {companyitems}
                 </div>
               </Col>
@@ -192,15 +207,20 @@ class Companies extends Component {
       )
     );
     const requiredItem = this.state.requiredItem;
-    debugger;
+    //debugger;
+
     let modalData = test[requiredItem];
-    if (modalData) {
+
+    test.forEach(element => {
+      if (element.id == requiredItem) modalData = element;
+    });
+    /*if (modalData) {
       console.log(requiredItem);
       console.log(test);
       console.log(modalData.company);
     } else {
       console.log("Not heat!");
-    }
+    }*/
     return (
       <div>
         <button
@@ -215,10 +235,10 @@ class Companies extends Component {
         {companyitems}
 
         {modalData ? (
-          <Test
+          <MyModal
             company={modalData.company}
             InterestRate={modalData.InterestRate}
-            MaxLoan={modalData.MaxPer}
+            MaxLoan={modalData.MaxLoan}
             MaxPer={modalData.MaxPer}
             MonthlyPayment={modalData.MonthlyPayment}
             TotalExpense={modalData.TotalExpense}
@@ -233,6 +253,7 @@ class Companies extends Component {
             link={modalData.link}
             contentLabel="Example Modal"
             openModal={true}
+            saveModalDetails={this.saveModalDetails}
           />
         ) : null}
       </div>
@@ -241,6 +262,11 @@ class Companies extends Component {
 }
 
 Companies.propTypes = {
+  fetchUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  userState: PropTypes.object.isRequired,
+  loggedIn: PropTypes.any.isRequired,
+
   companyAction: PropTypes.func.isRequired,
   readWriteCompany: PropTypes.func.isRequired,
   companies: PropTypes.array.isRequired,
@@ -255,9 +281,12 @@ const mapStateToProps = state => ({
   present: state.app.present,
   loanPeriod: state.app.loanPeriod,
   yearMin: state.app.yearMin,
-  yearMAx: state.app.yearMAx
+  yearMAx: state.app.yearMAx,
+  userState: state.users,
+  user: state.users.user,
+  loggedIn: state.users.loggedIn
 });
 export default connect(
   mapStateToProps,
-  { companyAction, readStat, readWriteCompany }
+  { companyAction, readStat, readWriteCompany, fetchUser }
 )(Companies);

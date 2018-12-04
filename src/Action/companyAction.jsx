@@ -27,6 +27,8 @@ export const companyAction = filter => dispatch => {
     loanList.forEach(element => {
       if (element.MaxPer >= filter.loanPeriod) tempList.push(element);
     });
+    console.log(loanList);
+
     dispatch({
       type: FETCH_COMPANIES,
       payload: tempList

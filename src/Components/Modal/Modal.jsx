@@ -33,23 +33,83 @@ class MyModal extends Component {
       currencies: []
     };*/
     this.state = {
+      maxloanstep: 1000,
       requiredItem: 0,
       modalIsOpen: false,
-      editPressed: false
+      editPressed: false,
+      id: 0,
+      company: "test",
+      InterestRate: 0,
+      MaxLoan: 0,
+      MaxPer: 0,
+      MonthlyPayment: 0,
+      TotalExpense: 0,
+      AgeLimit: 0,
+      MinIncome: 0,
+      CustomerLimit: "Yes",
+      BadRecordCheck: "Yes",
+      logo: "",
+      private: "Yes",
+      sms: "Yes",
+      link: "Yes"
     };
+  }
+
+  componentWillMount() {
+    this.setState({ company: this.props.company });
+    this.setState({ InterestRate: this.props.InterestRate });
+    this.setState({ MaxLoan: this.props.MaxLoan });
+    this.setState({ MaxPer: this.props.MaxPer });
+    this.setState({ MonthlyPayment: this.props.MonthlyPayment });
+    this.setState({ TotalExpense: this.props.TotalExpense });
+    this.setState({ MinIncome: this.props.MinIncome });
+    this.setState({ CustomerLimit: this.props.CustomerLimit });
+    this.setState({ BadRecordCheck: this.props.BadRecordCheck });
+    this.setState({ logo: this.props.logo });
+    this.setState({ sms: this.props.sms });
+    this.setState({ link: this.props.link });
+    this.setState({ AgeLimit: this.props.AgeLimit });
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       id: nextProps.id,
-      date: nextProps.date,
-      currency: nextProps.currency,
-      value: nextProps.value,
-      msg: nextProps.msg
+      company: nextProps.company,
+      InterestRate: nextProps.InterestRate,
+      MaxLoan: nextProps.MaxLoan,
+      MaxPer: nextProps.MaxLoan,
+      MonthlyPayment: nextProps.MonthlyPayment,
+      TotalExpense: nextProps.TotalExpense,
+      AgeLimit: nextProps.AgeLimit,
+      MinIncome: nextProps.MinIncome,
+      CustomerLimit: nextProps.CustomerLimit,
+      BadRecordCheck: nextProps.BadRecordCheck,
+      logo: nextProps.logo,
+      private: nextProps.private,
+      sms: nextProps.sms,
+      link: nextProps.link
     });
   }
 
-  saveModalDetails(e) {}
+  saveModalDetails(e) {
+    const item = {
+      company: this.state.company,
+      InterestRate: this.state.InterestRate,
+      MaxLoan: this.state.MaxLoan,
+      MaxPer: this.state.MaxPer,
+      MonthlyPayment: this.state.MonthlyPayment,
+      TotalExpense: this.state.TotalExpense,
+      AgeLimit: this.state.AgeLimit,
+      MinIncome: this.state.MinIncome,
+      CustomerLimit: this.state.CustomerLimit,
+      BadRecordCheck: this.state.BadRecordCheck,
+      logo: this.state.logo,
+      private: this.state.private,
+      sms: this.state.sms,
+      link: this.state.link
+    };
+    this.props.saveModalDetails(item);
+  }
 
   openModal() {
     this.setState({ modalIsOpen: true });
@@ -78,32 +138,17 @@ class MyModal extends Component {
 
   handleSave() {
     const item = this.state;
-    this.props.saveModalDetails(item);
+    this.state.saveModalDetails(item);
   }
 
   render() {
-    //alert(this.props.test);
     return (
       <div>
         <Modal
-          isOpen={this.state.modalIsOpen}
+          isOpen={this.props.openModal}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
-          InterestRate={3.5}
-          MaxLoan={150000}
-          MaxPer={15}
-          MonthlyPayment={8888}
-          TotalExpense={""}
-          AgeLimit={22}
-          NoCreditCheck={"Yes"}
-          MinIncome={"100000"}
-          CustomerLimit={"No"}
-          BadRecordCheck={"No"}
-          logo={"Logo"}
-          private={"Private"}
-          sms={"sms"}
-          link={"link"}
           contentLabel="Example Modal"
         >
           <h2 ref={subtitle => (this.subtitle = subtitle)}>Modify</h2>
@@ -115,7 +160,7 @@ class MyModal extends Component {
                 name="company"
                 id="companyid"
                 placeholder="Enter the name of the company"
-                value={this.props.company}
+                value={this.state.company}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -126,7 +171,7 @@ class MyModal extends Component {
                 type="select"
                 name="private"
                 id="privateloanid"
-                value={this.props.private}
+                value={this.state.private}
                 onChange={e => this.companyHandler(e)}
               >
                 <option>Yes</option>
@@ -140,7 +185,7 @@ class MyModal extends Component {
                 type="select"
                 name="sms"
                 id="smsid"
-                value={this.props.sms}
+                value={this.state.sms}
                 onChange={e => this.companyHandler(e)}
               >
                 <option>Yes</option>
@@ -154,7 +199,7 @@ class MyModal extends Component {
                 type="select"
                 name="CustomerLimit"
                 id="customerlimitid"
-                value={this.props.CustomerLimit}
+                value={this.state.CustomerLimit}
                 onChange={e => this.companyHandler(e)}
               >
                 <option>Yes</option>
@@ -172,6 +217,7 @@ class MyModal extends Component {
                 min={16}
                 max={100}
                 placeholder="Set Age limit"
+                value={this.state.AgeLimit}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -183,7 +229,7 @@ class MyModal extends Component {
                 name="logo"
                 id="logoid"
                 placeholder="Logo here!"
-                value={this.props.logo}
+                value={this.state.logo}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -196,7 +242,7 @@ class MyModal extends Component {
                 id="interestrateid"
                 step={0.1}
                 placeholder="Interest Rate"
-                value={this.props.InterestRate}
+                value={this.state.InterestRate}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -207,10 +253,10 @@ class MyModal extends Component {
                 type="number"
                 name="MaxLoan"
                 id="maxloanid"
-                step={this.props.maxloanstep < 9500 ? 500 : 10000}
+                step={this.state.maxloanstep < 9500 ? 500 : 10000}
                 max={1000000}
                 placeholder="Max Loan"
-                value={this.props.MaxLoan}
+                value={this.state.MaxLoan}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -225,7 +271,7 @@ class MyModal extends Component {
                 min={3}
                 max={180}
                 placeholder="Max period in month"
-                value={this.props.MaxPer}
+                value={this.state.MaxPer}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -236,7 +282,7 @@ class MyModal extends Component {
                 type="select"
                 name="BadRecordCheck"
                 id="creditcheckid"
-                value={this.props.BadRecordCheck}
+                value={this.state.BadRecordCheck}
                 onChange={e => this.companyHandler(e)}
               >
                 <option>Yes</option>
@@ -253,7 +299,7 @@ class MyModal extends Component {
                 step={10000}
                 min={100000}
                 max={1000000}
-                value={this.props.MinIncome}
+                value={this.state.MinIncome}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -264,7 +310,7 @@ class MyModal extends Component {
                 name="link"
                 id="linkid"
                 placeholder="Link to bank"
-                value={this.props.link}
+                value={this.state.link}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
@@ -275,7 +321,7 @@ class MyModal extends Component {
                 name="logo"
                 id="logoid"
                 placeholder="Logo here!"
-                value={this.props.logo}
+                value={this.state.logo}
                 onChange={e => this.companyHandler(e)}
               />
             </FormGroup>
