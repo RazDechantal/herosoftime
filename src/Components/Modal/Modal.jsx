@@ -28,10 +28,6 @@ class MyModal extends Component {
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.saveModalDetails = this.saveModalDetails.bind(this);
-
-    /*this.state = {
-      currencies: []
-    };*/
     this.state = {
       maxloanstep: 1000,
       requiredItem: 0,
@@ -72,7 +68,7 @@ class MyModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
+    /*this.setState({
       id: nextProps.id,
       company: nextProps.company,
       InterestRate: nextProps.InterestRate,
@@ -88,19 +84,19 @@ class MyModal extends Component {
       private: nextProps.private,
       sms: nextProps.sms,
       link: nextProps.link
-    });
+    });*/
   }
 
-  saveModalDetails(e) {
+  saveModalDetails() {
     const item = {
       company: this.state.company,
-      InterestRate: this.state.InterestRate,
-      MaxLoan: this.state.MaxLoan,
-      MaxPer: this.state.MaxPer,
-      MonthlyPayment: this.state.MonthlyPayment,
-      TotalExpense: this.state.TotalExpense,
-      AgeLimit: this.state.AgeLimit,
-      MinIncome: this.state.MinIncome,
+      InterestRate: parseInt(this.state.InterestRate),
+      MaxLoan: parseInt(this.state.MaxLoan),
+      MaxPer: parseInt(this.state.MaxPer),
+      MonthlyPayment: parseInt(this.state.MonthlyPayment),
+      TotalExpense: parseInt(this.state.TotalExpense),
+      AgeLimit: parseInt(this.state.AgeLimit),
+      MinIncome: parseInt(this.state.MinIncome),
       CustomerLimit: this.state.CustomerLimit,
       BadRecordCheck: this.state.BadRecordCheck,
       logo: this.state.logo,
@@ -108,6 +104,7 @@ class MyModal extends Component {
       sms: this.state.sms,
       link: this.state.link
     };
+
     this.props.saveModalDetails(item);
   }
 

@@ -37,22 +37,22 @@ class Login extends Component {
     fire
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(u => {
+      .then(() => {
+        let user = {
+          name: this.state.name,
+          family: this.state.family,
+          email: this.state.email,
+          password: this.state.password
+        };
+        this.props.addUser(user);
+        this.props.userLogged(true);
+
         // This will redirect to the homepage if login successfull!
         this.props.history.push("/");
       })
       .catch(error => {
         console.log(error);
       });
-
-    let user = {
-      name: this.state.name,
-      family: this.state.family,
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.addUser(user);
-    this.props.userLogged(true);
   }
 
   signUp(e) {
@@ -168,6 +168,7 @@ class Login extends Component {
                   value={this.state.email}
                   onChange={this.handleChange}
                   className="form-control"
+                  id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
@@ -214,7 +215,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   user: state.users.user,
-  userLogged: state.users.userLogged
+  userLogged: state.users.loggedIn
 });
 export default connect(
   mapStateToProps,

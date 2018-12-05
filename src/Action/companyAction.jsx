@@ -1,8 +1,4 @@
-import {
-  FETCH_COMPANIES,
-  WRITE_MONEY_STAT,
-  FETCH_ONE_COMPANY
-} from "../Action/types";
+import { FETCH_COMPANIES, WRITE_MONEY_STAT } from "../Action/types";
 
 // Firebase
 import firebase from "firebase";

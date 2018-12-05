@@ -5,6 +5,7 @@ import { companyAction } from "../../Action/companyAction";
 import { readWriteCompany } from "../../Action/readWriteCompany";
 import { readStat } from "../../Action/appReadStat";
 import { fetchUser } from "../../Action/fetchUser";
+import { userLogged } from "../../Action/userLogged";
 
 import Test from "../Test/Test";
 import TestX from "../Test/TestX";
@@ -126,28 +127,31 @@ class Companies extends Component {
   }
 
   saveModalDetails(item) {
-    var docRef = db.collection("Loans").doc(item.company);
-    docRef
+    db.collection("Loans")
+      .doc(item.company)
       .update(item)
       .then(function() {
         console.log("Document successfully updated!");
-        console.log(docRef);
       })
       .catch(function(error) {
-        // The document probably doesn't exist.
         console.error("Error updating document: ", error);
-        //this.setState({ [this.state.modalIsOpen]: false });
       });
   }
 
   deleteItem(loan) {
-    //debugger;
+    var p = this.props;
     db.collection("Loans")
       .doc(loan.company)
       .delete()
       .then(function() {
         console.log("Document successfully deleted!");
-        this.setState({ deleted: true });
+        var filter = {
+          loanSum: p.present,
+          loanPeriod: p.loanPeriod
+        };
+        p.companyAction(filter);
+        p.readStat();
+        p.readWriteCompany();
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
@@ -155,6 +159,8 @@ class Companies extends Component {
   }
 
   render() {
+    console.log("######" + this.props.loggedIn + "######");
+    console.log("the user in company is logged in: " + this.props.loggedIn);
     const test = [];
     const companyitems = this.props.companies.map(
       loan => (
@@ -265,8 +271,8 @@ Companies.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   userState: PropTypes.object.isRequired,
-  loggedIn: PropTypes.any.isRequired,
-
+  loggedIn: PropTypes.bool.isRequired,
+  userLogged: PropTypes.func.isRequired,
   companyAction: PropTypes.func.isRequired,
   readWriteCompany: PropTypes.func.isRequired,
   companies: PropTypes.array.isRequired,
@@ -288,5 +294,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { companyAction, readStat, readWriteCompany, fetchUser }
+  { companyAction, readStat, readWriteCompany, fetchUser, userLogged }
 )(Companies);

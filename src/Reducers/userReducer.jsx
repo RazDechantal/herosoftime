@@ -17,13 +17,16 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
+  //debugger;
   switch (action.type) {
     case USER_LOGGED:
+      debugger;
       return {
         ...state,
         loggedIn: action.payload
       };
     case ADD_USER:
+      debugger;
       return {
         ...state,
         user: action.payload

@@ -89,7 +89,7 @@ class Navigation extends React.Component {
                       </NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/app/Admin">Admin</NavLink>
+                      <NavLink href="/app/Setting">Setting</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -106,7 +106,7 @@ Navigation.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   userState: PropTypes.object.isRequired,
-  loggedIn: PropTypes.any.isRequired
+  loggedIn: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
