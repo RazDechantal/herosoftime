@@ -242,6 +242,7 @@ class AddComp extends Component {
           >
             Add to table
           </button>
+          <hr />
         </Form>
       </div>
     );

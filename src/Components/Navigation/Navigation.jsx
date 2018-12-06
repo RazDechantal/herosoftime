@@ -89,7 +89,7 @@ class Navigation extends React.Component {
                       </NavLink>
                     </DropdownItem>
                     <DropdownItem>
-                      <NavLink href="/app/Setting">Setting</NavLink>
+                      <NavLink href="/app/Admin">Admin</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>

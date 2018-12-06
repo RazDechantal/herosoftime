@@ -18,6 +18,18 @@ const store = createStore(
     //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
-/* eslint-enable */
+
+/*console.log(store.getState());
+
+const render = () => {
+  document.body.innerText = store.getState();
+};
+
+store.subscribe(render);
+render();
+
+document.addEventListener("click", () => {
+  store.dispatch({ type: "FETCH_USER" });
+});*/
 
 export default store;

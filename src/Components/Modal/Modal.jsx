@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, Row, Col, Button, Form, FormGroup, Label } from "reactstrap";
+import { Input, Form, FormGroup, Label } from "reactstrap";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -20,14 +20,12 @@ class MyModal extends Component {
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
-    this.msgHandler = this.msgHandler.bind(this);
-    this.valHandler = this.valHandler.bind(this);
-    this.currHandler = this.companyHandler.bind(this);
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.saveModalDetails = this.saveModalDetails.bind(this);
+
     this.state = {
       maxloanstep: 1000,
       requiredItem: 0,
@@ -52,6 +50,7 @@ class MyModal extends Component {
   }
 
   componentWillMount() {
+    this.setState({ id: this.props.id });
     this.setState({ company: this.props.company });
     this.setState({ InterestRate: this.props.InterestRate });
     this.setState({ MaxLoan: this.props.MaxLoan });
@@ -67,28 +66,9 @@ class MyModal extends Component {
     this.setState({ AgeLimit: this.props.AgeLimit });
   }
 
-  componentWillReceiveProps(nextProps) {
-    /*this.setState({
-      id: nextProps.id,
-      company: nextProps.company,
-      InterestRate: nextProps.InterestRate,
-      MaxLoan: nextProps.MaxLoan,
-      MaxPer: nextProps.MaxLoan,
-      MonthlyPayment: nextProps.MonthlyPayment,
-      TotalExpense: nextProps.TotalExpense,
-      AgeLimit: nextProps.AgeLimit,
-      MinIncome: nextProps.MinIncome,
-      CustomerLimit: nextProps.CustomerLimit,
-      BadRecordCheck: nextProps.BadRecordCheck,
-      logo: nextProps.logo,
-      private: nextProps.private,
-      sms: nextProps.sms,
-      link: nextProps.link
-    });*/
-  }
-
   saveModalDetails() {
     const item = {
+      id: parseInt(this.state.id),
       company: this.state.company,
       InterestRate: parseInt(this.state.InterestRate),
       MaxLoan: parseInt(this.state.MaxLoan),
@@ -122,20 +102,25 @@ class MyModal extends Component {
   }
 
   companyHandler(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+    e.stopPropagation();
+    let v;
 
-  valHandler(e) {
-    this.setState({ value: e.target.value });
-  }
+    if (e.target.type === "number") {
+      if (e.target.step > 0 && e.target.step < 1) {
+        v = parseFloat(e.target.value);
+      } else {
+        v = parseInt(e.target.value);
+      }
+    } else {
+      v = e.target.value;
+    }
 
-  msgHandler(e) {
-    this.setState({ msg: e.target.value });
+    this.setState({ [e.target.name]: v });
   }
 
   handleSave() {
     const item = this.state;
-    this.state.saveModalDetails(item);
+    this.props.saveModalDetails(item);
   }
 
   render() {
@@ -149,7 +134,7 @@ class MyModal extends Component {
           contentLabel="Example Modal"
         >
           <h2 ref={subtitle => (this.subtitle = subtitle)}>Modify</h2>
-          <Form onSubmit={this.saveModalDetails}>
+          <Form onSubmit={this.handleSave}>
             <FormGroup>
               <Label for="exampleNumber">Company</Label>
               <Input

@@ -47,6 +47,8 @@ class Login extends Component {
         this.props.addUser(user);
         this.props.userLogged(true);
 
+        console.log(this.props.loggedIn ? "logged in" : "Not logged in ");
+
         // This will redirect to the homepage if login successfull!
         this.props.history.push("/");
       })
@@ -162,13 +164,12 @@ class Login extends Component {
               <div className="from-group">
                 <label>Email address</label>
                 <input
-                  id="emailIdLog"
+                  id="emailregisterIdLog"
                   type="email"
                   name="email"
                   value={this.state.email}
                   onChange={this.handleChange}
                   className="form-control"
-                  id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
                 />
@@ -214,6 +215,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  users: state.users,
   user: state.users.user,
   userLogged: state.users.loggedIn
 });

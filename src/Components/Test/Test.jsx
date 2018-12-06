@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 
-import { Input, Row, Col, Button, Form, FormGroup, Label } from "reactstrap";
+import { Input, Form, FormGroup, Label } from "reactstrap";
 
 const customStyles = {
   content: {

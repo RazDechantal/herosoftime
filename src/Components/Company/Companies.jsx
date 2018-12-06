@@ -7,38 +7,22 @@ import { readStat } from "../../Action/appReadStat";
 import { fetchUser } from "../../Action/fetchUser";
 import { userLogged } from "../../Action/userLogged";
 
-import Test from "../Test/Test";
-import TestX from "../Test/TestX";
 // Firebase
 import firebase from "firebase/app";
 import cloudConfig from "../../Config/cloudFirebase";
 
 import "../Company/company.scss";
 
-//Modal
-//import Modal from "react-modal";
 import MyModal from "../Modal/Modal";
 
-import { Form, FormGroup, Row, Col, Button, Label, Input } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
+
+import store from "../../store";
 
 const db = firebase.firestore(cloudConfig);
 db.settings({
   timestampsInSnapshots: true
 });
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
-  }
-};
-
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-//Modal.setAppElement("#root");
 
 class Companies extends Component {
   constructor(props) {
@@ -48,9 +32,6 @@ class Companies extends Component {
     this.replaceModalItem = this.replaceModalItem.bind(this);
     this.companyHandler = this.companyHandler.bind(this);
 
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.saveModalDetails = this.saveModalDetails.bind(this);
 
     this.state = {
@@ -87,19 +68,6 @@ class Companies extends Component {
     this.props.readWriteCompany();
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = "#f00";
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
   btnClick() {
     var filter = {
       loanSum: this.props.present,
@@ -123,12 +91,11 @@ class Companies extends Component {
     var v = e.target.value;
     var test = this.state;
     console.log(this.state.loan);
-    //debugger;
   }
 
   saveModalDetails(item) {
-    db.collection("Loans")
-      .doc(item.company)
+    var docRef = db.collection("Loans").doc(item.company);
+    docRef
       .update(item)
       .then(function() {
         console.log("Document successfully updated!");
@@ -159,12 +126,15 @@ class Companies extends Component {
   }
 
   render() {
+    console.log(store.getState());
     console.log("######" + this.props.loggedIn + "######");
-    console.log("the user in company is logged in: " + this.props.loggedIn);
-    const test = [];
+    console.log(
+      "the user in company is logged in: " + this.props.users.loggedIn
+    );
+    const banks = [];
     const companyitems = this.props.companies.map(
       loan => (
-        test.push(loan),
+        banks.push(loan),
         (
           <div key={loan.id} className="decoration">
             <Row>
@@ -213,20 +183,16 @@ class Companies extends Component {
       )
     );
     const requiredItem = this.state.requiredItem;
-    //debugger;
 
-    let modalData = test[requiredItem];
+    let modalData;
 
-    test.forEach(element => {
-      if (element.id == requiredItem) modalData = element;
-    });
-    /*if (modalData) {
-      console.log(requiredItem);
-      console.log(test);
-      console.log(modalData.company);
-    } else {
-      console.log("Not heat!");
-    }*/
+    for (let element of banks) {
+      if (element.id === requiredItem) {
+        modalData = element;
+        break;
+      }
+    }
+
     return (
       <div>
         <button
@@ -242,6 +208,7 @@ class Companies extends Component {
 
         {modalData ? (
           <MyModal
+            id={modalData.id}
             company={modalData.company}
             InterestRate={modalData.InterestRate}
             MaxLoan={modalData.MaxLoan}
@@ -270,7 +237,7 @@ class Companies extends Component {
 Companies.propTypes = {
   fetchUser: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  userState: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
   loggedIn: PropTypes.bool.isRequired,
   userLogged: PropTypes.func.isRequired,
   companyAction: PropTypes.func.isRequired,
@@ -288,7 +255,7 @@ const mapStateToProps = state => ({
   loanPeriod: state.app.loanPeriod,
   yearMin: state.app.yearMin,
   yearMAx: state.app.yearMAx,
-  userState: state.users,
+  users: state.users,
   user: state.users.user,
   loggedIn: state.users.loggedIn
 });
