@@ -89,7 +89,7 @@ class Login extends Component {
         </Jumbotron>
         <div className="row">
           <div className="col-md-6">
-            <form>
+            <form onSubmit={this.login}>
               <div className="from-group">
                 <label>Email address</label>
                 <input
@@ -121,7 +121,6 @@ class Login extends Component {
 
               <div className="form-group">
                 <button
-                  onClick={this.login}
                   style={{ marginLeft: "0px" }}
                   type="submit"
                   className="btn btn-primary"
@@ -132,7 +131,7 @@ class Login extends Component {
             </form>
           </div>
           <div className="col-md-6">
-            <form>
+            <form onSubmit={this.signUp}>
               <div className="from-group">
                 <label>Name</label>
                 <input
@@ -191,7 +190,6 @@ class Login extends Component {
               </div>
               <div className="form-group">
                 <button
-                  onClick={this.signUp}
                   style={{ marginLeft: "0px" }}
                   type="submit"
                   className="btn btn-success"

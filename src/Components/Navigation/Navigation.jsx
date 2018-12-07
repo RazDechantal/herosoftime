@@ -51,7 +51,9 @@ class Navigation extends React.Component {
         <div>
           <Navbar light expand="md">
             <NavbarBrand>
-              <img src={SRC} alt="Some text" />
+              <NavLink href="/">
+                <img src={SRC} alt="Some text" />
+              </NavLink>
             </NavbarBrand>
             {"You are logged in as: "}
             {this.props.user.email}

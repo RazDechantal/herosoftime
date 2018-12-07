@@ -13,6 +13,7 @@ import companyReducer from "./companyReducer";
 import offerReducer from "./offerReducer";
 import contentReducer from "./contentReducer";
 import loanReducer from "./loanReducer";
+import { firebaseReducer } from "react-redux-firebase";
 
 export default combineReducers({
   app: appReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
   companies: companyReducer,
   offers: offerReducer,
   users: userReducer,
-  contents: contentReducer
+  contents: contentReducer,
+  firebase: firebaseReducer
 });
