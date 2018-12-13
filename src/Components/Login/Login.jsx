@@ -4,10 +4,15 @@ import fire from "../../Config/cloudFirebase";
 import { Jumbotron, Grid } from "react-bootstrap";
 
 import { connect } from "react-redux";
+
 import PropTypes from "prop-types";
 import { addUser } from "../../Action/addUser";
 import { userLogged } from "../../Action/userLogged";
 import { fetchUser } from "../../Action/fetchUser";
+
+//Auth
+import { signIn } from "../../Action/authAction";
+import { signUp } from "../../Action/authAction";
 
 class Login extends Component {
   constructor(props) {
@@ -24,63 +29,24 @@ class Login extends Component {
     };
   }
 
-  componentWillMount() {
-    this.props.fetchUser();
-  }
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   login(e) {
     e.preventDefault();
-    fire
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        let user = {
-          name: this.state.name,
-          family: this.state.family,
-          email: this.state.email,
-          password: this.state.password
-        };
-        this.props.addUser(user);
-        this.props.userLogged(true);
-
-        console.log(this.props.loggedIn ? "logged in" : "Not logged in ");
-
-        // This will redirect to the homepage if login successfull!
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.signIn(this.state);
+    this.props.history.push("/");
   }
 
   signUp(e) {
     e.preventDefault();
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        // This will redirect to the homepage if login successfull!
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    let user = {
-      name: this.state.name,
-      family: this.state.family,
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.addUser(user);
-    this.props.userLogged(true);
+    this.props.signUp(this.state);
+    this.props.history.push("/");
   }
 
   render() {
+    const { authError } = this.props;
     return (
       <Grid>
         <Jumbotron>
@@ -96,7 +62,6 @@ class Login extends Component {
                   id="emailIdLog"
                   type="email"
                   name="email"
-                  value={this.state.email}
                   onChange={this.handleChange}
                   className="form-control"
                   aria-describedby="emailHelp"
@@ -112,7 +77,6 @@ class Login extends Component {
                   id="passwordIdLog"
                   type="password"
                   name="password"
-                  value={this.state.password}
                   onChange={this.handleChange}
                   className="form-control"
                   placeholder="Password"
@@ -138,7 +102,6 @@ class Login extends Component {
                   id="nameIdSign"
                   type="Text"
                   name="name"
-                  value={this.state.name}
                   onChange={this.handleChange}
                   className="form-control"
                   aria-describedby="emailHelp"
@@ -154,7 +117,6 @@ class Login extends Component {
                   id="familyIdSign"
                   type="Text"
                   name="family"
-                  value={this.state.family}
                   onChange={this.handleChange}
                   className="form-control"
                   placeholder="Family name"
@@ -166,7 +128,6 @@ class Login extends Component {
                   id="emailregisterIdLog"
                   type="email"
                   name="email"
-                  value={this.state.email}
                   onChange={this.handleChange}
                   className="form-control"
                   aria-describedby="emailHelp"
@@ -182,7 +143,6 @@ class Login extends Component {
                   id="passwordIdSign"
                   type="password"
                   name="password"
-                  value={this.state.password}
                   onChange={this.handleChange}
                   className="form-control"
                   placeholder="Password"
@@ -199,25 +159,19 @@ class Login extends Component {
               </div>
             </form>
           </div>
+          <div className="red-text center">
+            {authError ? <p>{authError}</p> : null}
+          </div>
         </div>
       </Grid>
     );
   }
 }
 
-Login.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
-  userLogged: PropTypes.func.isRequired,
-  addUser: PropTypes.func.isRequired,
-  user: PropTypes.any.isRequired
-};
-
 const mapStateToProps = state => ({
-  users: state.users,
-  user: state.users.user,
-  userLogged: state.users.loggedIn
+  authError: state.auth.authError
 });
 export default connect(
   mapStateToProps,
-  { addUser, userLogged, fetchUser }
+  { signIn, signUp }
 )(Login);

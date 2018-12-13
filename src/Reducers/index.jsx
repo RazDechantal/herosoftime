@@ -13,15 +13,19 @@ import companyReducer from "./companyReducer";
 import offerReducer from "./offerReducer";
 import contentReducer from "./contentReducer";
 import loanReducer from "./loanReducer";
+import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
+import authReducer from "./authReducer";
 
 export default combineReducers({
   app: appReducer,
+  auth: authReducer,
   posts: postReducer,
   loans: loanReducer,
   companies: companyReducer,
   offers: offerReducer,
   users: userReducer,
   contents: contentReducer,
-  firebase: firebaseReducer
+  firebase: firebaseReducer,
+  firestore: firestoreReducer
 });

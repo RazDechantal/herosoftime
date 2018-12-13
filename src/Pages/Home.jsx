@@ -11,9 +11,7 @@ class App extends Component {
       <Container>
         <Row className="App-text">
           <Col xs="12" md="6">
-            <div>
-              <Content content="Jämför Lån" />
-            </div>
+            <div />
           </Col>
           <Col xs="12" md="6">
             <div>

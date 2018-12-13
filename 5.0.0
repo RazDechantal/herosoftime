@@ -1,0 +1,4 @@
++ ajv@6.6.1
+added 3 packages from 1 contributor and audited 34486 packages in 17.552s
+found 42 vulnerabilities (1 low, 35 moderate, 6 high)
+  run `npm audit fix` to fix them, or `npm audit` for details

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 import PropTypes from "prop-types";
 import { companyAction } from "../../Action/companyAction";
 import { readWriteCompany } from "../../Action/readWriteCompany";
@@ -11,18 +13,21 @@ import { userLogged } from "../../Action/userLogged";
 import firebase from "firebase/app";
 import cloudConfig from "../../Config/cloudFirebase";
 
+//Firestore
+
 import "../Company/company.scss";
 
 import MyModal from "../Modal/Modal";
 
 import { Row, Col, Button } from "reactstrap";
 
-import store from "../../store";
-
-const db = firebase.firestore(cloudConfig);
+var loans = [];
+//const db = getFirestore();
+const db = null;
+/*const db = firebase.firestore(cloudConfig);
 db.settings({
   timestampsInSnapshots: true
-});
+});*/
 
 class Companies extends Component {
   constructor(props) {
@@ -63,9 +68,13 @@ class Companies extends Component {
       loanSum: this.props.present,
       loanPeriod: this.props.loanPeriod
     };
-    this.props.companyAction(filter);
-    this.props.readStat();
-    this.props.readWriteCompany();
+    //this.props.companyAction(filter);
+    //this.props.readStat();
+    //this.props.readWriteCompany();
+  }
+
+  componentDidMount() {
+    loans = this.props.companies;
   }
 
   btnClick() {
@@ -73,7 +82,7 @@ class Companies extends Component {
       loanSum: this.props.present,
       loanPeriod: this.props.loanPeriod
     };
-    this.props.companyAction(filter);
+    //this.props.companyAction(filter);
   }
 
   replaceModalItem(loan) {
@@ -116,9 +125,9 @@ class Companies extends Component {
           loanSum: p.present,
           loanPeriod: p.loanPeriod
         };
-        p.companyAction(filter);
-        p.readStat();
-        p.readWriteCompany();
+        //p.companyAction(filter);
+        //p.readStat();
+        //p.readWriteCompany();
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
@@ -126,62 +135,65 @@ class Companies extends Component {
   }
 
   render() {
-    console.log(store.getState());
-    console.log("######" + this.props.loggedIn + "######");
-    console.log(
-      "the user in company is logged in: " + this.props.users.loggedIn
-    );
     const banks = [];
-    const companyitems = this.props.companies.map(
-      loan => (
-        banks.push(loan),
-        (
-          <div key={loan.id} className="decoration">
-            <Row>
-              <Col xs="4">
-                <img src={loan.logo} alt="" />
-                <div>
-                  <Button
-                    hidden={this.props.loggedIn ? "" : "hidden"}
-                    color="warning"
-                    onClick={() => this.replaceModalItem(loan)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    hidden={this.props.loggedIn ? "" : "hidden"}
-                    color="danger"
-                    onClick={() => this.deleteItem(loan)}
-                  >
-                    Delete
-                  </Button>{" "}
-                  <hr />
-                  {companyitems}
-                </div>
-              </Col>
-              <Col xl="4">
-                <p>Interestrate: {loan.InterestRate}</p>
-                <p>Max loan: {loan.MaxLoan}</p>
-                <p>Max Period: {loan.MaxPer}</p>
-                <p>Credit-check: {loan.NoCreditCheck}</p>
-              </Col>
-              <Col xl="4">
-                <p>Min-income: {loan.MinIncome}</p>
-                <p>Customer-limit: {loan.CustomerLimit}</p>
-                <p>BadRecordCheck: {loan.BadRecordCheck}</p>
-                <a
-                  href={loan.link}
-                  className="button small applyYellow btn btn-primary btn-block"
-                >
-                  Se erbjudande
-                </a>
-              </Col>
-            </Row>
-            <hr />
-          </div>
-        )
-      )
+    const { loans } = this.props;
+    const { userId } = this.props;
+
+    const companyitems = (
+      <div>
+        {loans
+          ? loans.map(
+              loan => (
+                banks.push(loan),
+                (
+                  <div key={loan.id} className="decoration">
+                    <Row>
+                      <Col xs="4">
+                        <img src={loan.logo} alt="" />
+                        <div>
+                          <Button
+                            hidden={userId ? "" : "hidden"}
+                            color="warning"
+                            onClick={() => this.replaceModalItem(loan)}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            hidden={userId ? "" : "hidden"}
+                            color="danger"
+                            onClick={() => this.deleteItem(loan)}
+                          >
+                            Delete
+                          </Button>{" "}
+                          <hr />
+                        </div>
+                      </Col>
+                      <Col xl="4">
+                        <p>Interestrate: {loan.InterestRate}</p>
+                        <p>Max loan: {loan.MaxLoan}</p>
+                        <p>Max Period: {loan.MaxPer}</p>
+                        <p>Credit-check: {loan.NoCreditCheck}</p>
+                      </Col>
+                      <Col xl="4">
+                        <p>Min-income: {loan.MinIncome}</p>
+                        <p>Customer-limit: {loan.CustomerLimit}</p>
+                        <p>BadRecordCheck: {loan.BadRecordCheck}</p>
+                        <a
+                          href={loan.link}
+                          className="button small applyYellow btn btn-primary btn-block"
+                        >
+                          Se erbjudande
+                        </a>
+                      </Col>
+                    </Row>
+                  </div>
+                )
+              )
+            )
+          : null}
+      </div>
     );
+
     const requiredItem = this.state.requiredItem;
 
     let modalData;
@@ -201,7 +213,7 @@ class Companies extends Component {
           className="btn btn-primary btn-lg btn-block"
           onClick={this.btnClick}
         >
-          <h1>Jämför lån</h1>
+          <h1>Jämför Lån</h1>
         </button>
         <hr />
         {companyitems}
@@ -234,32 +246,14 @@ class Companies extends Component {
   }
 }
 
-Companies.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  userLogged: PropTypes.func.isRequired,
-  companyAction: PropTypes.func.isRequired,
-  readWriteCompany: PropTypes.func.isRequired,
-  companies: PropTypes.array.isRequired,
-  readStat: PropTypes.func.isRequired
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    loans: state.firestore.ordered.Loans,
+    userId: state.firebase.auth.uid
+  };
 };
-
-const mapStateToProps = state => ({
-  companies: state.companies.items,
-  company: state.companies.company,
-  loanSum: state.app.loanSum,
-  loanPresent: state.app.loanPresent,
-  present: state.app.present,
-  loanPeriod: state.app.loanPeriod,
-  yearMin: state.app.yearMin,
-  yearMAx: state.app.yearMAx,
-  users: state.users,
-  user: state.users.user,
-  loggedIn: state.users.loggedIn
-});
-export default connect(
-  mapStateToProps,
-  { companyAction, readStat, readWriteCompany, fetchUser, userLogged }
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "Loans" }])
 )(Companies);

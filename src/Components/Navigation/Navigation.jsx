@@ -25,11 +25,9 @@ import SRC from "../../Static/img/Logo01.png";
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false,
-      email: this.props.userState.email
+      isOpen: false
     };
   }
   toggle() {
@@ -38,25 +36,19 @@ class Navigation extends React.Component {
     });
   }
 
-  componentWillMount() {
-    fetchUser();
-  }
-
-  componentDidMount() {
-    this.setState({ email: this.props.userState.email });
-  }
   render() {
+    const { userId } = this.props;
     return (
       <div>
         <div>
           <Navbar light expand="md">
             <NavbarBrand>
-              <NavLink href="/">
+              <NavItem is="/">
                 <img src={SRC} alt="Some text" />
-              </NavLink>
+              </NavItem>
             </NavbarBrand>
-            {"You are logged in as: "}
-            {this.props.user.email}
+            {userId ? "You are logged in as: " + userId : ""}
+
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
@@ -85,9 +77,8 @@ class Navigation extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href="/app/Login">
-                        {" "}
-                        {this.props.loggedIn ? "Logg out" : "Logg in"}{" "}
+                      <NavLink href={userId ? "/app/Logout" : "/app/Login"}>
+                        {userId ? "Logg out" : "Logg in"}
                       </NavLink>
                     </DropdownItem>
                     <DropdownItem>
@@ -104,18 +95,13 @@ class Navigation extends React.Component {
   }
 }
 
-Navigation.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  userState: PropTypes.object.isRequired,
-  loggedIn: PropTypes.bool.isRequired
+const mapStateToProps = state => {
+  console.log("in Navbar", state);
+  return {
+    userId: state.firebase.auth.uid
+  };
 };
 
-const mapStateToProps = state => ({
-  userState: state.users,
-  user: state.users.user,
-  loggedIn: state.users.loggedIn
-});
 export default connect(
   mapStateToProps,
   { fetchUser }

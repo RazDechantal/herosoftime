@@ -9,16 +9,11 @@ import { fetchUser } from "../../Action/fetchUser";
 import { Row, Form, FormGroup, Label, Col, Input } from "reactstrap";
 
 import firebase from "firebase/app";
-import cloudConfig from "../../Config/cloudFirebase";
+import db from "../../Config/cloudFirebase";
 // Redirect
 import { Redirect } from "react-router-dom";
 //import { Router, Route, Switch, Redirect } from "react-router";
 //import { history } from "./AppRouter";
-
-const db = firebase.firestore(cloudConfig);
-db.settings({
-  timestampsInSnapshots: true
-});
 
 class AddComp extends Component {
   constructor(props) {
