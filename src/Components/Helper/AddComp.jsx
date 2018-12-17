@@ -8,12 +8,18 @@ import { fetchUser } from "../../Action/fetchUser";
 
 import { Row, Form, FormGroup, Label, Col, Input } from "reactstrap";
 
+// Firebase
 import firebase from "firebase/app";
-import db from "../../Config/cloudFirebase";
+import "firebase/firestore";
+import "firebase/auth";
+import dbConfig from "../../Config/cloudFirebase";
+
 // Redirect
 import { Redirect } from "react-router-dom";
 //import { Router, Route, Switch, Redirect } from "react-router";
 //import { history } from "./AppRouter";
+
+const db = firebase.firestore(dbConfig);
 
 class AddComp extends Component {
   constructor(props) {
@@ -47,7 +53,9 @@ class AddComp extends Component {
       .set({
         id: colSize + 10,
         company: document.getElementById("companyid").value,
-        InterestRate: parseInt(document.getElementById("interestrateid").value),
+        InterestRate: parseFloat(
+          document.getElementById("interestrateid").value
+        ),
         MaxLoan: parseInt(document.getElementById("maxloanid").value),
         MaxPer: parseInt(document.getElementById("maxperiodid").value),
         MonthlyPayment: 0,

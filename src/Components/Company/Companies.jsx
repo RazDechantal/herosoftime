@@ -2,32 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import PropTypes from "prop-types";
-import { companyAction } from "../../Action/companyAction";
-import { readWriteCompany } from "../../Action/readWriteCompany";
-import { readStat } from "../../Action/appReadStat";
-import { fetchUser } from "../../Action/fetchUser";
-import { userLogged } from "../../Action/userLogged";
+
+import { Row, Col, Button } from "reactstrap";
 
 // Firebase
 import firebase from "firebase/app";
-import cloudConfig from "../../Config/cloudFirebase";
+import "firebase/firestore";
+import "firebase/auth";
+import dbConfig from "../../Config/cloudFirebase";
 
 //Firestore
 
 import "../Company/company.scss";
-
 import MyModal from "../Modal/Modal";
+import { companyAction } from "../../Action/companyAction";
+import { readWriteCompany } from "../../Action/readWriteCompany";
+import { readStat } from "../../Action/appReadStat";
 
-import { Row, Col, Button } from "reactstrap";
-
-var loans = [];
-//const db = getFirestore();
-const db = null;
-/*const db = firebase.firestore(cloudConfig);
-db.settings({
-  timestampsInSnapshots: true
-});*/
+const db = firebase.firestore(dbConfig);
 
 class Companies extends Component {
   constructor(props) {
@@ -36,14 +28,16 @@ class Companies extends Component {
     this.btnClick = this.btnClick.bind(this);
     this.replaceModalItem = this.replaceModalItem.bind(this);
     this.companyHandler = this.companyHandler.bind(this);
-
     this.saveModalDetails = this.saveModalDetails.bind(this);
 
     this.state = {
+      companies: [],
       requiredItem: 9999,
       modalIsOpen: false,
       editPressed: false,
       deleted: false,
+      MaxLoan: 1,
+      MaxPer: 1,
       loan: {
         id: 0,
         company: "test",
@@ -63,18 +57,15 @@ class Companies extends Component {
       }
     };
   }
+
   componentWillMount() {
     var filter = {
       loanSum: this.props.present,
       loanPeriod: this.props.loanPeriod
     };
-    //this.props.companyAction(filter);
-    //this.props.readStat();
-    //this.props.readWriteCompany();
-  }
-
-  componentDidMount() {
-    loans = this.props.companies;
+    this.props.companyAction(filter);
+    this.props.readStat();
+    this.props.readWriteCompany();
   }
 
   btnClick() {
@@ -82,7 +73,7 @@ class Companies extends Component {
       loanSum: this.props.present,
       loanPeriod: this.props.loanPeriod
     };
-    //this.props.companyAction(filter);
+    this.props.companyAction(filter);
   }
 
   replaceModalItem(loan) {
@@ -97,8 +88,6 @@ class Companies extends Component {
     this.setState({ [e.target.name]: e.target.value }, () => {
       console.log(this.state.loan);
     });
-    var v = e.target.value;
-    var test = this.state;
     console.log(this.state.loan);
   }
 
@@ -125,9 +114,9 @@ class Companies extends Component {
           loanSum: p.present,
           loanPeriod: p.loanPeriod
         };
-        //p.companyAction(filter);
-        //p.readStat();
-        //p.readWriteCompany();
+        p.companyAction(filter);
+        p.readStat();
+        p.readWriteCompany();
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
@@ -135,6 +124,7 @@ class Companies extends Component {
   }
 
   render() {
+    console.log("the props loaded are: ", this.props);
     const banks = [];
     const { loans } = this.props;
     const { userId } = this.props;
@@ -247,13 +237,26 @@ class Companies extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    loans: state.firestore.ordered.Loans,
-    userId: state.firebase.auth.uid
+    loans: state.companies.items,
+    //loans: state.firestore.ordered.Loans,
+    userId: state.firebase.auth.uid,
+    loanSum: state.app.loanSum,
+    loanPresent: state.app.loanPresent,
+    present: state.app.present,
+    loanPeriod: state.app.loanPeriod,
+    yearMin: state.app.yearMin,
+    yearMax: state.app.yearMax
   };
 };
 export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([{ collection: "Loans" }])
+  connect(
+    mapStateToProps,
+    { companyAction, readStat, readWriteCompany }
+  ),
+  firestoreConnect((props, store) => [
+    {
+      collection: "Loans"
+    }
+  ])
 )(Companies);

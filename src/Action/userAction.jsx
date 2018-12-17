@@ -1,4 +1,4 @@
-import { FETCH_USERS, NEW_USER } from "./types";
+import { FETCH_USERS } from "./types";
 import fire from "../Config/firebase";
 
 // Retreiving the info from backend and dispatching to the store

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import AddComp from "../Helper/AddComp";
-import Company from "../Company/Companies";
-import Test from "../Test/Test";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -14,8 +12,6 @@ class Admin extends Component {
     this.props.fetchUser();
   }
   render() {
-    var test = this.props;
-    //debugger;
     return (
       <div>
         <h1>You are: {this.props.loggedIn}</h1>

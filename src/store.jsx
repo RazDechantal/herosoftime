@@ -4,12 +4,17 @@ import rootReducer from "./Reducers";
 
 import { reduxFirestore, getFirestore } from "redux-firestore";
 import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
-import cloudConfig from "./Config/cloudFirebase";
+import dbSetting from "./Config/cloudFirebase";
+
+//Firebase
+import "firebase/firestore";
+import "firebase/auth";
+
+//firebase.initializeApp(dbSetting);
+dbSetting.firestore().settings({ timestampsInSnapshots: true });
 
 //debugger;
 const initialState = {};
-
-const middleware = [thunk];
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
@@ -17,12 +22,11 @@ const store = createStore(
   initialState,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(cloudConfig),
-    reactReduxFirebase(cloudConfig),
+    reduxFirestore(dbSetting),
+    reactReduxFirebase(dbSetting),
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : f => f
   )
 );
-console.log("store is:" + store);
 export default store;

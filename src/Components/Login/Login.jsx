@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import fire from "../../Config/cloudFirebase";
 
 import { Jumbotron, Grid } from "react-bootstrap";
 
 import { connect } from "react-redux";
-
-import PropTypes from "prop-types";
-import { addUser } from "../../Action/addUser";
-import { userLogged } from "../../Action/userLogged";
-import { fetchUser } from "../../Action/fetchUser";
 
 //Auth
 import { signIn } from "../../Action/authAction";

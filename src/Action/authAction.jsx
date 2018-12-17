@@ -7,8 +7,6 @@ import {
   SIGNUP_ERROR
 } from "./types";
 
-import fire from "../Config/cloudFirebase";
-
 export const signIn = credentials => {
   return (dispatch, getState, { getFirebase }) => {
     const fire = getFirebase();

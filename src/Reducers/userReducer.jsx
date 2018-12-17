@@ -16,10 +16,6 @@ const initialState = {
   users: []
 };
 
-const test = {
-  name: "amir"
-};
-
 export default function(state = initialState, action) {
   //debugger;
   switch (action.type) {

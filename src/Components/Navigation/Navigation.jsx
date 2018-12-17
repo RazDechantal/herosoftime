@@ -2,7 +2,6 @@ import React from "react";
 
 import "../../Style/app.scss";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 import { fetchUser } from "../../Action/fetchUser";
 
@@ -96,7 +95,6 @@ class Navigation extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("in Navbar", state);
   return {
     userId: state.firebase.auth.uid
   };
