@@ -20,7 +20,7 @@ export const signIn = credentials => {
       .catch(err => {
         dispatch({
           type: LOGIN_ERROR,
-          err
+          payload: err
         });
       });
   };
@@ -38,7 +38,7 @@ export const signOut = () => {
       .catch(err => {
         dispatch({
           type: SIGNOUT_ERROR,
-          err
+          payload: err
         });
       });
   };
@@ -54,13 +54,9 @@ export const signUp = credentials => {
         dispatch({ type: SIGNUP_SUCCESS });
       })
       .catch(err => {
-        let error = {
-          errorCode: err.code,
-          errorMessage: err.message
-        };
         dispatch({
           type: SIGNUP_ERROR,
-          payload: error
+          payload: err
         });
       });
   };

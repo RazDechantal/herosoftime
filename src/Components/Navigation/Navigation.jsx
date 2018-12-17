@@ -36,7 +36,8 @@ class Navigation extends React.Component {
   }
 
   render() {
-    const { userId } = this.props;
+    const { email } = this.props;
+    console.log(this.props);
     return (
       <div>
         <div>
@@ -46,7 +47,7 @@ class Navigation extends React.Component {
                 <img src={SRC} alt="Some text" />
               </NavItem>
             </NavbarBrand>
-            {userId ? "You are logged in as: " + userId : ""}
+            {email ? "You are logged in as: " + email : ""}
 
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -76,8 +77,8 @@ class Navigation extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href={userId ? "/app/Logout" : "/app/Login"}>
-                        {userId ? "Logg out" : "Logg in"}
+                      <NavLink href={email ? "/app/Logout" : "/app/Login"}>
+                        {email ? "Logg out" : "Logg in"}
                       </NavLink>
                     </DropdownItem>
                     <DropdownItem>
@@ -96,7 +97,7 @@ class Navigation extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.firebase.auth.uid
+    email: state.firebase.auth.email
   };
 };
 

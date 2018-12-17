@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 
+// Redux firebase
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+
 // Firebase
 import fire from "../../Config/firebase";
 import firebase from "firebase/app";
-import cloudConfig from "../../Config/cloudFirebase";
+import dbConfig from "../../Config/cloudFirebase";
 // Css
 import "../Company/company.scss";
 import "../Checkbox/checkbox.scss";
+
+const db = firebase.firestore(dbConfig);
 
 class LoanListNoRedux extends Component {
   constructor(props) {
@@ -30,21 +37,7 @@ class LoanListNoRedux extends Component {
     this.templist = [];
     this.queries = [];
 
-    this.ref = fire
-      .database()
-      .ref()
-      .child("Loans");
-
-    this.refCloud = cloudConfig
-      .database()
-      .ref()
-      .child("Loans");
-
-    this.db = firebase.firestore(cloudConfig);
-    this.db.settings({
-      timestampsInSnapshots: true
-    });
-    this.loans = this.db.collection("Loans");
+    this.loans = db.collection("Loans");
   }
 
   handleChange(e) {
@@ -207,14 +200,15 @@ class LoanListNoRedux extends Component {
         break;
     }
 
-    this.tempList = [];
+    var tempList = [];
+    var counter = 0;
     for (let i = 0; i < this.queries.length; i++) {
       this.queries[i].get().then(querySnapshot => {
         //currentComponent.setState({ loanlist: [] });
         querySnapshot.forEach(doc => {
-          this.tempList.push(doc.data());
+          tempList.push(doc.data());
         });
-        currentComponent.setState({ loanlist: this.tempList });
+        currentComponent.setState({ loanlist: tempList });
       });
     }
   }
@@ -223,7 +217,7 @@ class LoanListNoRedux extends Component {
 
   render() {
     const loanitems = this.state.loanlist.map(loan => (
-      <div key={loan.id} className="decoration">
+      <div key={loan.id} loan={loan} className="decoration">
         <Row>
           <Col xs="4">
             <img src={loan.logo} alt="" />
@@ -311,5 +305,28 @@ class LoanListNoRedux extends Component {
     );
   }
 }
+
+//export default LoanListNoRedux;
+
+/*const mapStateToProps = state => {
+  console.log(state);
+  return {
+    privateLoans: state.firestore.ordered.Loans
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(() => [
+    {
+      collection: "Loans",
+      where: [
+        ["sms", "==", "Yes"],
+        ["private", "==", "Yes"],
+        ["BadRecordCheck", "==", "Yes"]
+      ]
+    }
+  ])
+)(LoanListNoRedux);*/
 
 export default LoanListNoRedux;

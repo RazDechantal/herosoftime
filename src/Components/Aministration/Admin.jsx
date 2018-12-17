@@ -2,16 +2,13 @@ import React, { Component } from "react";
 import AddComp from "../Helper/AddComp";
 
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-
-import { fetchUser } from "../../Action/fetchUser";
-import { userLogged } from "../../Action/userLogged";
+import { Redirect } from "react-router-dom";
 
 class Admin extends Component {
-  componentWillMount() {
-    this.props.fetchUser();
-  }
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/Login" />;
+
     return (
       <div>
         <h1>You are: {this.props.loggedIn}</h1>
@@ -22,20 +19,9 @@ class Admin extends Component {
   }
 }
 
-Admin.propTypes = {
-  fetchUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  userState: PropTypes.object.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  userLogged: PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => ({
-  userState: state.users,
-  user: state.users.user,
-  loggedIn: state.users.loggedIn
+  authError: state.auth.authError,
+  userName: state.auth.name,
+  auth: state.firebase.auth
 });
-export default connect(
-  mapStateToProps,
-  { fetchUser, userLogged }
-)(Admin);
+export default connect(mapStateToProps)(Admin);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { Jumbotron, Grid } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -28,9 +29,11 @@ class Login extends Component {
   }
 
   login(e) {
+    const { auth } = this.props;
+
     e.preventDefault();
     this.props.signIn(this.state);
-    this.props.history.push("/");
+    if (!auth.uid) return <Redirect to="/Login" />;
   }
 
   signUp(e) {
@@ -40,7 +43,9 @@ class Login extends Component {
   }
 
   render() {
-    const { authError } = this.props;
+    const { authError, auth } = this.props;
+    if (auth.uid) return <Redirect to="/" />;
+
     return (
       <Grid>
         <Jumbotron>
@@ -163,7 +168,9 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  authError: state.auth.authError
+  authError: state.auth.authError,
+  userName: state.auth.name,
+  auth: state.firebase.auth
 });
 export default connect(
   mapStateToProps,

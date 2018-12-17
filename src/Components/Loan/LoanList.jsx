@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Row, Col } from "reactstrap";
 
-import { fetchLoan } from "../../Action/loanAction";
-import { readStat } from "../../Action/appReadStat";
+// Redux firebase
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 import "../Company/company.scss";
 
@@ -28,29 +28,6 @@ class LoanList extends Component {
         smsBox: this.props.smsBox
       });
   }
-
-  /*componentWillMount() {
-     if (this.props.privateBox != nextProps.privateBox)
-      this.props.fetchLoan({
-        private: this.props.privateBox,
-        anmarkningBox: this.props.anmarkningBox,
-        ucBox: this.props.ucBox,
-        smsBox: this.props.smsBox
-      });
-      this.props.privateBox = nextProps.privateBox;
-    this.props.anmarkningBox = nextProps.anmarkningBox;
-    this.props.ucBox = nextProps.ucBox;
-    this.props.smsBox = nextProps.smsBox;
-  
-    const boxes = {
-      private: this.props.privateBox,
-      anmarkningBox: this.props.anmarkningBox,
-      ucBox: this.props.ucBox,
-      smsBox: this.props.smsBox
-    };
-
-    this.props.fetchLoan(boxes);
-  }*/
   render() {
     const loanitems = this.props.loans.map(loan => (
       <div key={loan.id} className="decoration">
@@ -89,23 +66,19 @@ class LoanList extends Component {
   }
 }
 
-LoanList.propTypes = {
-  fetchLoan: PropTypes.func.isRequired,
-  loans: PropTypes.array.isRequired,
-  readStat: PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    loans: state.loans.items,
-    privateBox: state.app.privateBox,
-    anmarkningBox: state.app.anmarkningBox,
-    ucBox: state.app.ucBox,
-    smsBox: state.app.smsBox
+    privateLoans: state.firestore.ordered.Loans
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchLoan, readStat }
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(() => [
+    {
+      collection: "Loans",
+      where: [["private", "==", "Yes"]]
+    }
+  ])
 )(LoanList);
