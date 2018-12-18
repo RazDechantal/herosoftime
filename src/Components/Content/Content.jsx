@@ -9,7 +9,7 @@ class Content extends Component {
   }
   render() {
     const contentitems = this.props.contents.map(content => (
-      <div key={content.id}>
+      <div key={content.id} content={content}>
         <h3>{content.title}</h3>
         <p>{content.text}</p>
       </div>

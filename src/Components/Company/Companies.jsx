@@ -124,7 +124,6 @@ class Companies extends Component {
   }
 
   render() {
-    console.log("the props loaded are: ", this.props);
     const banks = [];
     const { loans } = this.props;
     const { userId } = this.props;
@@ -140,6 +139,7 @@ class Companies extends Component {
                     <Row>
                       <Col xs="4">
                         <img src={loan.logo} alt="" />
+                        <hr />
                         <div>
                           <Button
                             hidden={userId ? "" : "hidden"}
@@ -174,6 +174,7 @@ class Companies extends Component {
                         >
                           Se erbjudande
                         </a>
+                        <hr />
                       </Col>
                     </Row>
                   </div>

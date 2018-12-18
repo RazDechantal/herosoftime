@@ -37,9 +37,11 @@ class Login extends Component {
   }
 
   signUp(e) {
+    const { auth } = this.props;
+
     e.preventDefault();
     this.props.signUp(this.state);
-    this.props.history.push("/");
+    if (!auth.uid) return <Redirect to="/Login" />;
   }
 
   render() {
@@ -158,8 +160,8 @@ class Login extends Component {
               </div>
             </form>
           </div>
-          <div className="red-text center">
-            {authError ? <p>{authError}</p> : null}
+          <div style={{ margin: "auto", color: "red" }}>
+            <h1> {authError ? <p>{authError}</p> : null}</h1>
           </div>
         </div>
       </Grid>

@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 
-// Redux firebase
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
-
 // Firebase
-import fire from "../../Config/firebase";
 import firebase from "firebase/app";
 import dbConfig from "../../Config/cloudFirebase";
 // Css
@@ -201,7 +195,6 @@ class LoanListNoRedux extends Component {
     }
 
     var tempList = [];
-    var counter = 0;
     for (let i = 0; i < this.queries.length; i++) {
       this.queries[i].get().then(querySnapshot => {
         //currentComponent.setState({ loanlist: [] });

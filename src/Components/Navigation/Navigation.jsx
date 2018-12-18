@@ -3,8 +3,6 @@ import React from "react";
 import "../../Style/app.scss";
 import { connect } from "react-redux";
 
-import { fetchUser } from "../../Action/fetchUser";
-
 import {
   Collapse,
   Navbar,
@@ -37,18 +35,16 @@ class Navigation extends React.Component {
 
   render() {
     const { email } = this.props;
-    console.log(this.props);
+
+    if (email) var name = email.substring(0, email.lastIndexOf("@"));
+    //var domain = email.substring(email.lastIndexOf("@") + 1);
     return (
       <div>
         <div>
-          <Navbar light expand="md">
-            <NavbarBrand>
-              <NavItem is="/">
-                <img src={SRC} alt="Some text" />
-              </NavItem>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">
+              <img src={SRC} alt="Some text" />
             </NavbarBrand>
-            {email ? "You are logged in as: " + email : ""}
-
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
@@ -85,6 +81,7 @@ class Navigation extends React.Component {
                       <NavLink href="/app/Admin">Admin</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
+                  <h4> {email ? "Hi, " + name : ""}</h4>
                 </UncontrolledDropdown>
               </Nav>
             </Collapse>
@@ -101,7 +98,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchUser }
-)(Navigation);
+export default connect(mapStateToProps)(Navigation);
