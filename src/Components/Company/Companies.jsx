@@ -109,7 +109,11 @@ class Companies extends Component {
                         <div>
                           <Button
                             hidden={
+<<<<<<< HEAD
                               role === "SuperAdmin" && !isEmpty ? false : true
+=======
+                              role == "SuperAdmin" && !isEmpty ? false : true
+>>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
                             }
                             color="warning"
                             onClick={() => this.replaceModalItem(loan)}
@@ -118,7 +122,11 @@ class Companies extends Component {
                           </Button>
                           <Button
                             hidden={
+<<<<<<< HEAD
                               role === "SuperAdmin" && !isEmpty ? false : true
+=======
+                              role == "SuperAdmin" && !isEmpty ? false : true
+>>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
                             }
                             color="danger"
                             onClick={() => this.deleteItem(loan)}
@@ -210,7 +218,11 @@ class Companies extends Component {
 const mapStateToProps = state => {
   return {
     loans: state.companies.items,
+<<<<<<< HEAD
     errorCompanyReadWrite: state.companies.error,
+=======
+    //loans: state.firestore.ordered.Loans,
+>>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
     role: state.firebase.profile.role,
     isEmpty: state.firebase.auth.isEmpty,
     userId: state.firebase.auth.uid,
