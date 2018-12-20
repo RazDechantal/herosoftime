@@ -7,13 +7,11 @@ import { connect } from "react-redux";
 
 //Auth
 import { signIn } from "../../Action/authAction";
-import { signUp } from "../../Action/authAction";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.signUp = this.signUp.bind(this);
     this.login = this.login.bind(this);
 
     this.state = {
@@ -33,14 +31,6 @@ class Login extends Component {
 
     e.preventDefault();
     this.props.signIn(this.state);
-    if (!auth.uid) return <Redirect to="/Login" />;
-  }
-
-  signUp(e) {
-    const { auth } = this.props;
-
-    e.preventDefault();
-    this.props.signUp(this.state);
     if (!auth.uid) return <Redirect to="/Login" />;
   }
 
@@ -95,71 +85,6 @@ class Login extends Component {
               </div>
             </form>
           </div>
-          <div className="col-md-6">
-            <form onSubmit={this.signUp}>
-              <div className="from-group">
-                <label>Name</label>
-                <input
-                  id="nameIdSign"
-                  type="Text"
-                  name="name"
-                  onChange={this.handleChange}
-                  className="form-control"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter Name"
-                />
-                <small id="emailHelp" className="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small>
-              </div>
-              <div className="form-group">
-                <label>Family Name</label>
-                <input
-                  id="familyIdSign"
-                  type="Text"
-                  name="family"
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Family name"
-                />
-              </div>
-              <div className="from-group">
-                <label>Email address</label>
-                <input
-                  id="emailregisterIdLog"
-                  type="email"
-                  name="email"
-                  onChange={this.handleChange}
-                  className="form-control"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                />
-                <small id="emailHelp" className="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small>
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  id="passwordIdSign"
-                  type="password"
-                  name="password"
-                  onChange={this.handleChange}
-                  className="form-control"
-                  placeholder="Password"
-                />
-              </div>
-              <div className="form-group">
-                <button
-                  style={{ marginLeft: "0px" }}
-                  type="submit"
-                  className="btn btn-success"
-                >
-                  Sign up
-                </button>
-              </div>
-            </form>
-          </div>
           <div style={{ margin: "auto", color: "red" }}>
             <h1> {authError ? <p>{authError}</p> : null}</h1>
           </div>
@@ -176,5 +101,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { signIn, signUp }
+  { signIn }
 )(Login);

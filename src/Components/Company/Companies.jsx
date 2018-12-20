@@ -5,21 +5,11 @@ import { compose } from "redux";
 
 import { Row, Col, Button } from "reactstrap";
 
-// Firebase
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import dbConfig from "../../Config/cloudFirebase";
-
-//Firestore
-
 import "../Company/company.scss";
 import MyModal from "../Modal/Modal";
 import { companyAction } from "../../Action/companyAction";
-import { readWriteCompany } from "../../Action/readWriteCompany";
-import { readStat } from "../../Action/appReadStat";
-
-const db = firebase.firestore(dbConfig);
+import { update } from "../../Action/companyAction";
+import { deleteItem } from "../../Action/companyAction";
 
 class Companies extends Component {
   constructor(props) {
@@ -64,8 +54,6 @@ class Companies extends Component {
       loanPeriod: this.props.loanPeriod
     };
     this.props.companyAction(filter);
-    this.props.readStat();
-    this.props.readWriteCompany();
   }
 
   btnClick() {
@@ -77,7 +65,6 @@ class Companies extends Component {
   }
 
   replaceModalItem(loan) {
-    //debugger;
     this.setState({ requiredItem: loan.id });
     this.setState({ modalIsOpen: true });
     this.setState({ loan: loan });
@@ -85,48 +72,27 @@ class Companies extends Component {
 
   companyHandler(e) {
     e.stopPropagation();
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state.loan);
-    });
+    this.setState({ [e.target.name]: e.target.value });
     console.log(this.state.loan);
   }
 
   saveModalDetails(item) {
-    var docRef = db.collection("Loans").doc(item.company);
-    docRef
-      .update(item)
-      .then(function() {
-        console.log("Document successfully updated!");
-      })
-      .catch(function(error) {
-        console.error("Error updating document: ", error);
-      });
+    this.props.update(item);
   }
 
-  deleteItem(loan) {
+  deleteItem(item) {
+    this.props.deleteItem(item);
     var p = this.props;
-    db.collection("Loans")
-      .doc(loan.company)
-      .delete()
-      .then(function() {
-        console.log("Document successfully deleted!");
-        var filter = {
-          loanSum: p.present,
-          loanPeriod: p.loanPeriod
-        };
-        p.companyAction(filter);
-        p.readStat();
-        p.readWriteCompany();
-      })
-      .catch(function(error) {
-        console.error("Error removing document: ", error);
-      });
+    var filter = {
+      loanSum: p.present,
+      loanPeriod: p.loanPeriod
+    };
+    p.companyAction(filter);
   }
 
   render() {
     const banks = [];
-    const { loans } = this.props;
-    const { userId } = this.props;
+    const { loans, role, isEmpty } = this.props;
 
     const companyitems = (
       <div>
@@ -142,14 +108,18 @@ class Companies extends Component {
                         <hr />
                         <div>
                           <Button
-                            hidden={userId ? "" : "hidden"}
+                            hidden={
+                              role === "SuperAdmin" && !isEmpty ? false : true
+                            }
                             color="warning"
                             onClick={() => this.replaceModalItem(loan)}
                           >
                             Edit
                           </Button>
                           <Button
-                            hidden={userId ? "" : "hidden"}
+                            hidden={
+                              role === "SuperAdmin" && !isEmpty ? false : true
+                            }
                             color="danger"
                             onClick={() => this.deleteItem(loan)}
                           >
@@ -240,8 +210,11 @@ class Companies extends Component {
 const mapStateToProps = state => {
   return {
     loans: state.companies.items,
-    //loans: state.firestore.ordered.Loans,
+    errorCompanyReadWrite: state.companies.error,
+    role: state.firebase.profile.role,
+    isEmpty: state.firebase.auth.isEmpty,
     userId: state.firebase.auth.uid,
+    email: state.firebase.auth.email,
     loanSum: state.app.loanSum,
     loanPresent: state.app.loanPresent,
     present: state.app.present,
@@ -253,9 +226,9 @@ const mapStateToProps = state => {
 export default compose(
   connect(
     mapStateToProps,
-    { companyAction, readStat, readWriteCompany }
+    { companyAction, update, deleteItem }
   ),
-  firestoreConnect((props, store) => [
+  firestoreConnect(() => [
     {
       collection: "Loans"
     }
