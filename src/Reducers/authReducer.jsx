@@ -48,14 +48,11 @@ const authReducer = (state = initialState, action) => {
       console.log("Signup succeded");
       return {
         ...state,
-        authError: null,
-        name: action.payload,
-        family: action.payload,
-        email: action.payload,
-        password: action.payload
+        authError: null
       };
 
     case "SIGNUP_ERROR":
+      console.log("Signup failed");
       return {
         ...state,
         authError: action.payload.message

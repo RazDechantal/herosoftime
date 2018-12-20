@@ -1,7 +1,9 @@
 import { FETCH_COMPANIES, WRITE_MONEY_STAT } from "../Action/types";
 
 // Firebase
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 import cloudConfig from "../Config/cloudFirebase";
 
 // Retreiving the info from backend and dispatching to the store

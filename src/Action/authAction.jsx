@@ -45,11 +45,27 @@ export const signOut = () => {
 };
 
 export const signUp = credentials => {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
+    const firestore = getFirestore();
     firebase
       .auth()
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
+      .then(resp => {
+        return firestore
+          .collection("users")
+          .doc(resp.user.uid)
+          .set({
+            firstName: credentials.name,
+            lastName: credentials.family,
+            role: credentials.role,
+            address: credentials.address,
+            zip: credentials.zip,
+            city: credentials.city,
+            country: credentials.country,
+            accountNumber: credentials.account
+          });
+      })
       .then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
       })

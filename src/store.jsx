@@ -15,6 +15,11 @@ dbSetting.firestore().settings({ timestampsInSnapshots: true });
 
 //debugger;
 const initialState = {};
+const rrfConfig = {
+  useFirestoreForProfile: true,
+  userProfile: "users",
+  attachAuthIsReady: true
+};
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
@@ -23,7 +28,7 @@ const store = createStore(
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(dbSetting),
-    reactReduxFirebase(dbSetting, { attachAuthIsReady: true }),
+    reactReduxFirebase(dbSetting, rrfConfig),
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : f => f

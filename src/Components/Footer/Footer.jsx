@@ -49,7 +49,7 @@ class Footer extends Component {
               <h2>Kontakta oss</h2>
               <hr />
               <div className="contact">
-                <a className="fa fa-phone"> </a>
+                <p className="fa fa-phone"> </p>
                 08232232
               </div>
               <div className="contact">

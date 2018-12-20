@@ -125,8 +125,7 @@ class Companies extends Component {
 
   render() {
     const banks = [];
-    const { loans } = this.props;
-    const { userId } = this.props;
+    const { loans, role, isEmpty } = this.props;
 
     const companyitems = (
       <div>
@@ -142,14 +141,18 @@ class Companies extends Component {
                         <hr />
                         <div>
                           <Button
-                            hidden={userId ? "" : "hidden"}
+                            hidden={
+                              role == "SuperAdmin" && !isEmpty ? false : true
+                            }
                             color="warning"
                             onClick={() => this.replaceModalItem(loan)}
                           >
                             Edit
                           </Button>
                           <Button
-                            hidden={userId ? "" : "hidden"}
+                            hidden={
+                              role == "SuperAdmin" && !isEmpty ? false : true
+                            }
                             color="danger"
                             onClick={() => this.deleteItem(loan)}
                           >
@@ -241,7 +244,10 @@ const mapStateToProps = state => {
   return {
     loans: state.companies.items,
     //loans: state.firestore.ordered.Loans,
+    role: state.firebase.profile.role,
+    isEmpty: state.firebase.auth.isEmpty,
     userId: state.firebase.auth.uid,
+    email: state.firebase.auth.email,
     loanSum: state.app.loanSum,
     loanPresent: state.app.loanPresent,
     present: state.app.present,

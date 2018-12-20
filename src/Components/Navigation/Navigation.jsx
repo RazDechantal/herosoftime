@@ -34,10 +34,8 @@ class Navigation extends React.Component {
   }
 
   render() {
-    const { email } = this.props;
+    const { isEmpty, email, firstName, role } = this.props;
 
-    if (email) var name = email.substring(0, email.lastIndexOf("@"));
-    //var domain = email.substring(email.lastIndexOf("@") + 1);
     return (
       <div>
         <div>
@@ -50,9 +48,6 @@ class Navigation extends React.Component {
               <Nav className="ml-auto" navbar>
                 <NavItem>
                   <NavLink href="/app">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/app/Company">Companies</NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
@@ -69,19 +64,25 @@ class Navigation extends React.Component {
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
-                    My page
+                    {!isEmpty ? firstName : "My page"}
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink href={email ? "/app/Logout" : "/app/Login"}>
-                        {email ? "Logg out" : "Logg in"}
+                      <NavLink href={!isEmpty ? "/app/Logout" : "/app/Login"}>
+                        {!isEmpty ? "Logg out" : "Logg in"}
                       </NavLink>
                     </DropdownItem>
-                    <DropdownItem>
-                      <NavLink href="/app/Admin">Admin</NavLink>
+                    <DropdownItem
+                      hidden={!isEmpty && role == "SuperAdmin" ? false : true}
+                    >
+                      <NavLink href="/app/Admin">Add Company</NavLink>
+                    </DropdownItem>
+                    <DropdownItem
+                      hidden={!isEmpty && role == "SuperAdmin" ? false : true}
+                    >
+                      <NavLink href="/app/Signup">Add customer</NavLink>
                     </DropdownItem>
                   </DropdownMenu>
-                  <h4> {email ? "Hi, " + name : ""}</h4>
                 </UncontrolledDropdown>
               </Nav>
             </Collapse>
@@ -94,7 +95,10 @@ class Navigation extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    email: state.firebase.auth.email
+    email: state.firebase.auth.email,
+    firstName: state.firebase.profile.firstName,
+    role: state.firebase.profile.role,
+    isEmpty: state.firebase.auth.isEmpty
   };
 };
 
