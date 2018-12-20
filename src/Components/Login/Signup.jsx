@@ -2,18 +2,9 @@ import React, { Component } from "react";
 
 import { Jumbotron, Grid } from "react-bootstrap";
 
-<<<<<<< HEAD
 import { connect } from "react-redux";
 
 import { signUp } from "../../Action/authAction";
-import { signOut } from "../../Action/authAction";
-=======
-import { Redirect } from "react-router-dom";
-
-import { connect } from "react-redux";
-
-import { signUp } from "../../Action/authAction";
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
 
 class Signup extends Component {
   constructor(props) {
@@ -45,17 +36,10 @@ class Signup extends Component {
     e.preventDefault();
     this.props.signUp(this.state);
 
-<<<<<<< HEAD
     if (authError === null) {
       this.setState({ state: [] });
       this.props.history.push("/");
     }
-=======
-    if ({ authError } == null) {
-      this.setState({ state: [] });
-      return <Redirect to="/" />;
-    } else return <Redirect to="/Signup" />;
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
   }
 
   render() {
@@ -226,9 +210,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-<<<<<<< HEAD
-  { signUp, signOut }
-=======
   { signUp }
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
 )(Signup);

@@ -34,11 +34,7 @@ class Navigation extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
     const { isEmpty, firstName, role } = this.props;
-=======
-    const { isEmpty, email, firstName, role } = this.props;
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
 
     return (
       <div>
@@ -77,20 +73,12 @@ class Navigation extends React.Component {
                       </NavLink>
                     </DropdownItem>
                     <DropdownItem
-<<<<<<< HEAD
                       hidden={!isEmpty && role === "SuperAdmin" ? false : true}
-=======
-                      hidden={!isEmpty && role == "SuperAdmin" ? false : true}
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
                     >
                       <NavLink href="/app/Admin">Add Company</NavLink>
                     </DropdownItem>
                     <DropdownItem
-<<<<<<< HEAD
                       hidden={!isEmpty && role === "SuperAdmin" ? false : true}
-=======
-                      hidden={!isEmpty && role == "SuperAdmin" ? false : true}
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
                     >
                       <NavLink href="/app/Signup">Add customer</NavLink>
                     </DropdownItem>

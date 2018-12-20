@@ -48,15 +48,9 @@ export const signOut = () => {
 
 export const signUp = credentials => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-<<<<<<< HEAD
     //const firebase = getFirebase();
     const firestore = getFirestore();
     admin
-=======
-    const firebase = getFirebase();
-    const firestore = getFirestore();
-    firebase
->>>>>>> 02a5d253aa9e50413e6c99835a249f134b39241c
       .auth()
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then(resp => {
