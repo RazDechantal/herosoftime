@@ -5,7 +5,7 @@ import { fetchContents } from "../../Action/contentAction";
 
 class Content extends Component {
   componentWillMount() {
-    this.props.fetchContents(this.props.content);
+    this.props.fetchContents();
   }
   render() {
     const contentitems = this.props.contents.map(content => (

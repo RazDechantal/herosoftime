@@ -7,13 +7,13 @@ import "firebase/firestore";
 import dbConfig from "../Config/cloudFirebase";
 
 // Retreiving the info from backend and dispatching to the store
-export const fetchContents = myTitle => dispatch => {
+export const fetchContents = () => dispatch => {
   const loanList = [];
 
   var db = firebase.firestore(dbConfig);
 
-  var loans = db.collection("Content");
-  var query = loans.where("title", "==", myTitle);
+  var query = db.collection("Content");
+  //var query = loans.where("title", "==", myTitle);
 
   query.get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
