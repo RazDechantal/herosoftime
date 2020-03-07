@@ -35,6 +35,6 @@ export const fetchLoan = boxes => dispatch => {
 };
 
 /*        payload: boxes.anmarkningBox
-          ? snapshot.val().filter(item => item.BadRecordCheck == "Yes")
+          ? .filter(item => item.BadRecordCheck == "Yes")
           : snapshot.val()
  */

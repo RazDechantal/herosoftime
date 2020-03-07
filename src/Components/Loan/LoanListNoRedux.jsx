@@ -304,7 +304,7 @@ class LoanListNoRedux extends Component {
 /*const mapStateToProps = state => {
   console.log(state);
   return {
-    privateLoans: state.firestore.ordered.Loans
+    privateLoans: .ordered.Loans
   };
 };
 
