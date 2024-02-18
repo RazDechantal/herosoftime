@@ -9,9 +9,10 @@ import { fetchUser } from "../../Action/fetchUser";
 import { Row, Form, FormGroup, Label, Col, Input } from "reactstrap";
 
 // Firebase
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
 import dbConfig from "../../Config/cloudFirebase";
 
 // Redirect

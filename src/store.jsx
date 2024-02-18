@@ -7,8 +7,9 @@ import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 import dbSetting from "./Config/cloudFirebase";
 
 //Firebase
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 //firebase.initializeApp(dbSetting);
 dbSetting.firestore().settings({ timestampsInSnapshots: true });

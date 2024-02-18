@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 
 // Firebase
-import firebase from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
 import dbConfig from "../../Config/cloudFirebase";
 // Css
 import "../Company/company.scss";
